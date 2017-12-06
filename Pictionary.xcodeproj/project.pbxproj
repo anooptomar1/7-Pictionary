@@ -8,16 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		27332BAD1FD749A700D9E46D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27332BAC1FD749A700D9E46D /* AppDelegate.swift */; };
-		27332BAF1FD749A700D9E46D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27332BAE1FD749A700D9E46D /* ViewController.swift */; };
+		27332BAF1FD749A700D9E46D /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27332BAE1FD749A700D9E46D /* TitleViewController.swift */; };
 		27332BB41FD749A700D9E46D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27332BB31FD749A700D9E46D /* Assets.xcassets */; };
+		276260FB1FD7B0F400EFB16F /* CARadialGradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276260FA1FD7B0F400EFB16F /* CARadialGradientLayer.swift */; };
+		278C4BB11FD78AEE00F57FD4 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278C4BB01FD78AEE00F57FD4 /* RoundButton.swift */; };
+		9D0300AD743D5B8A5F34E283 /* Pods_Pictionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A9FC1D0722CD6DAAC1E90E /* Pods_Pictionary.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		27332BA91FD749A700D9E46D /* Pictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pictionary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27332BAC1FD749A700D9E46D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		27332BAE1FD749A700D9E46D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		27332BAE1FD749A700D9E46D /* TitleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
 		27332BB31FD749A700D9E46D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27332BB81FD749A700D9E46D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		276260FA1FD7B0F400EFB16F /* CARadialGradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CARadialGradientLayer.swift; sourceTree = "<group>"; };
+		278C4BB01FD78AEE00F57FD4 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		A60BE99F2BFBDC6233540D85 /* Pods-Pictionary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pictionary.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pictionary/Pods-Pictionary.debug.xcconfig"; sourceTree = "<group>"; };
+		A6D706F07E4CAB3E90B7098A /* Pods-Pictionary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pictionary.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pictionary/Pods-Pictionary.release.xcconfig"; sourceTree = "<group>"; };
+		C6A9FC1D0722CD6DAAC1E90E /* Pods_Pictionary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pictionary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -25,17 +33,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D0300AD743D5B8A5F34E283 /* Pods_Pictionary.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E4E46753A0AEC790CC1CE67 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C6A9FC1D0722CD6DAAC1E90E /* Pods_Pictionary.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		27332BA01FD749A700D9E46D = {
 			isa = PBXGroup;
 			children = (
 				27332BAB1FD749A700D9E46D /* Pictionary */,
 				27332BAA1FD749A700D9E46D /* Products */,
+				85C89AAEA91C0BAB48EF8262 /* Pods */,
+				0E4E46753A0AEC790CC1CE67 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -51,11 +70,22 @@
 			isa = PBXGroup;
 			children = (
 				27332BAC1FD749A700D9E46D /* AppDelegate.swift */,
-				27332BAE1FD749A700D9E46D /* ViewController.swift */,
+				27332BAE1FD749A700D9E46D /* TitleViewController.swift */,
+				276260FA1FD7B0F400EFB16F /* CARadialGradientLayer.swift */,
+				278C4BB01FD78AEE00F57FD4 /* RoundButton.swift */,
 				27332BB31FD749A700D9E46D /* Assets.xcassets */,
 				27332BB81FD749A700D9E46D /* Info.plist */,
 			);
 			path = Pictionary;
+			sourceTree = "<group>";
+		};
+		85C89AAEA91C0BAB48EF8262 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A60BE99F2BFBDC6233540D85 /* Pods-Pictionary.debug.xcconfig */,
+				A6D706F07E4CAB3E90B7098A /* Pods-Pictionary.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -65,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 27332BBB1FD749A700D9E46D /* Build configuration list for PBXNativeTarget "Pictionary" */;
 			buildPhases = (
+				0B3A329A1ABB5F55C4E07E90 /* [CP] Check Pods Manifest.lock */,
 				27332BA51FD749A700D9E46D /* Sources */,
 				27332BA61FD749A700D9E46D /* Frameworks */,
 				27332BA71FD749A700D9E46D /* Resources */,
+				2D8A32DC9A82E4909912F1D8 /* [CP] Embed Pods Frameworks */,
+				546D6C4943B2AD461C3999C2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -123,12 +156,68 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0B3A329A1ABB5F55C4E07E90 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Pictionary-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2D8A32DC9A82E4909912F1D8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Pictionary/Pods-Pictionary-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/TouchDraw/TouchDraw.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TouchDraw.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pictionary/Pods-Pictionary-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		546D6C4943B2AD461C3999C2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pictionary/Pods-Pictionary-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		27332BA51FD749A700D9E46D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27332BAF1FD749A700D9E46D /* ViewController.swift in Sources */,
+				278C4BB11FD78AEE00F57FD4 /* RoundButton.swift in Sources */,
+				27332BAF1FD749A700D9E46D /* TitleViewController.swift in Sources */,
+				276260FB1FD7B0F400EFB16F /* CARadialGradientLayer.swift in Sources */,
 				27332BAD1FD749A700D9E46D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,13 +334,14 @@
 		};
 		27332BBC1FD749A700D9E46D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A60BE99F2BFBDC6233540D85 /* Pods-Pictionary.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M8MME6Q9DA;
 				INFOPLIST_FILE = Pictionary/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.paulherz.Pictionary;
+				PRODUCT_BUNDLE_IDENTIFIER = com.paulherz.NotPictionary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -260,13 +350,14 @@
 		};
 		27332BBD1FD749A700D9E46D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A6D706F07E4CAB3E90B7098A /* Pods-Pictionary.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M8MME6Q9DA;
 				INFOPLIST_FILE = Pictionary/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.paulherz.Pictionary;
+				PRODUCT_BUNDLE_IDENTIFIER = com.paulherz.NotPictionary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
