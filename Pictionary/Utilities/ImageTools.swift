@@ -187,6 +187,21 @@ class ImageTools {
 		return (ctx, cgImage)
 	}
 	
+	static func invert(image: UIImage) -> UIImage? {
+		guard let cgImage = image.cgImage else { return nil }
+		let ciImage = CIImage(cgImage: cgImage)
+		guard let filter = CIFilter(name: "CIColorInvert", withInputParameters: [
+			kCIInputImageKey: ciImage
+		]) else { return nil }
+		guard let outputCIImage = filter.outputImage else { return nil }
+		guard let outputCGImage = convertToCGImage(ciImage: outputCIImage) else { return nil }
+		return UIImage(cgImage: outputCGImage)
+	}
+	
+	static func convertToCGImage(ciImage: CIImage) -> CGImage? {
+		return CIContext(options: nil).createCGImage(ciImage, from: ciImage.extent)
+	}
+	
 	// Doesn't quite work yet
 	
 	//	static func makeBitmapArray(from image: UIImage) -> [UInt8]? {
