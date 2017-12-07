@@ -113,7 +113,8 @@ class DrawView: UIView {
 		clearButton = {
 			let b = UIButton()
 			b.translatesAutoresizingMaskIntoConstraints = false
-			b.setTitle("Clear", for: .normal)
+//			b.setTitle("Clear", for: .normal)
+			b.setImage(UIImage(imageLiteralResourceName: "Clear"), for: .normal)
 			b.setContentCompressionResistancePriority(.required, for: .horizontal)
 			return b
 		}()
@@ -132,7 +133,8 @@ class DrawView: UIView {
 		quitButton = {
 			let b = UIButton()
 			b.translatesAutoresizingMaskIntoConstraints = false
-			b.setTitle("Quit", for: .normal)
+//			b.setTitle("Quit", for: .normal)
+			b.setImage(UIImage(imageLiteralResourceName: "Quit"), for: .normal)
 			b.setContentCompressionResistancePriority(.required, for: .horizontal)
 			return b
 		}()
