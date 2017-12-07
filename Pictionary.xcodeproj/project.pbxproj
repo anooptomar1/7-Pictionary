@@ -20,6 +20,10 @@
 		2762610E1FD8C9DB00EFB16F /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2762610D1FD8C9DB00EFB16F /* DrawView.swift */; };
 		276261101FD8CE1800EFB16F /* LabelBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2762610F1FD8CE1800EFB16F /* LabelBox.swift */; };
 		276261121FD8F78300EFB16F /* categories.txt in Resources */ = {isa = PBXBuildFile; fileRef = 276261111FD8F78300EFB16F /* categories.txt */; };
+		276261151FD9039A00EFB16F /* RandomForest.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 276261131FD9039900EFB16F /* RandomForest.mlmodel */; };
+		276261161FD9039A00EFB16F /* CNN.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 276261141FD9039A00EFB16F /* CNN.mlmodel */; };
+		276261191FD903FB00EFB16F /* ImageTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276261181FD903FB00EFB16F /* ImageTools.swift */; };
+		2762611B1FD9044900EFB16F /* Classifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2762611A1FD9044900EFB16F /* Classifier.swift */; };
 		278C4BB11FD78AEE00F57FD4 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278C4BB01FD78AEE00F57FD4 /* RoundButton.swift */; };
 		9D0300AD743D5B8A5F34E283 /* Pods_Pictionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A9FC1D0722CD6DAAC1E90E /* Pods_Pictionary.framework */; };
 /* End PBXBuildFile section */
@@ -40,6 +44,10 @@
 		2762610D1FD8C9DB00EFB16F /* DrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
 		2762610F1FD8CE1800EFB16F /* LabelBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBox.swift; sourceTree = "<group>"; };
 		276261111FD8F78300EFB16F /* categories.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = categories.txt; sourceTree = "<group>"; };
+		276261131FD9039900EFB16F /* RandomForest.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = RandomForest.mlmodel; path = models/RandomForest.mlmodel; sourceTree = "<group>"; };
+		276261141FD9039A00EFB16F /* CNN.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = CNN.mlmodel; path = models/CNN.mlmodel; sourceTree = "<group>"; };
+		276261181FD903FB00EFB16F /* ImageTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTools.swift; sourceTree = "<group>"; };
+		2762611A1FD9044900EFB16F /* Classifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Classifier.swift; sourceTree = "<group>"; };
 		278C4BB01FD78AEE00F57FD4 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		A60BE99F2BFBDC6233540D85 /* Pods-Pictionary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pictionary.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pictionary/Pods-Pictionary.debug.xcconfig"; sourceTree = "<group>"; };
 		A6D706F07E4CAB3E90B7098A /* Pods-Pictionary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pictionary.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pictionary/Pods-Pictionary.release.xcconfig"; sourceTree = "<group>"; };
@@ -69,6 +77,8 @@
 		27332BA01FD749A700D9E46D = {
 			isa = PBXGroup;
 			children = (
+				276261141FD9039A00EFB16F /* CNN.mlmodel */,
+				276261131FD9039900EFB16F /* RandomForest.mlmodel */,
 				276261111FD8F78300EFB16F /* categories.txt */,
 				27332BAB1FD749A700D9E46D /* Pictionary */,
 				27332BAA1FD749A700D9E46D /* Products */,
@@ -95,6 +105,7 @@
 				2762610C1FD8C97100EFB16F /* Draw */,
 				276261021FD8891300EFB16F /* Components */,
 				276261051FD8AE5900EFB16F /* Utilities */,
+				276261171FD903DB00EFB16F /* Classifier */,
 				27332BB31FD749A700D9E46D /* Assets.xcassets */,
 				27332BB81FD749A700D9E46D /* Info.plist */,
 			);
@@ -133,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				276261061FD8AE7600EFB16F /* GyroManager.swift */,
+				276261181FD903FB00EFB16F /* ImageTools.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -144,6 +156,14 @@
 				2762610D1FD8C9DB00EFB16F /* DrawView.swift */,
 			);
 			path = Draw;
+			sourceTree = "<group>";
+		};
+		276261171FD903DB00EFB16F /* Classifier */ = {
+			isa = PBXGroup;
+			children = (
+				2762611A1FD9044900EFB16F /* Classifier.swift */,
+			);
+			path = Classifier;
 			sourceTree = "<group>";
 		};
 		85C89AAEA91C0BAB48EF8262 /* Pods */ = {
@@ -283,17 +303,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2762611B1FD9044900EFB16F /* Classifier.swift in Sources */,
 				276261071FD8AE7600EFB16F /* GyroManager.swift in Sources */,
 				276261091FD8BFF500EFB16F /* Design.swift in Sources */,
 				2762610E1FD8C9DB00EFB16F /* DrawView.swift in Sources */,
 				2762610B1FD8C96B00EFB16F /* DrawViewController.swift in Sources */,
 				278C4BB11FD78AEE00F57FD4 /* RoundButton.swift in Sources */,
 				276260FF1FD888D600EFB16F /* NextWordView.swift in Sources */,
+				276261161FD9039A00EFB16F /* CNN.mlmodel in Sources */,
+				276261191FD903FB00EFB16F /* ImageTools.swift in Sources */,
 				27332BAF1FD749A700D9E46D /* TitleViewController.swift in Sources */,
 				276260FB1FD7B0F400EFB16F /* CARadialGradientLayer.swift in Sources */,
 				27332BAD1FD749A700D9E46D /* AppDelegate.swift in Sources */,
 				276260FD1FD86ECD00EFB16F /* TitleView.swift in Sources */,
 				276261101FD8CE1800EFB16F /* LabelBox.swift in Sources */,
+				276261151FD9039A00EFB16F /* RandomForest.mlmodel in Sources */,
 				276261041FD88A9C00EFB16F /* NextWordViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
