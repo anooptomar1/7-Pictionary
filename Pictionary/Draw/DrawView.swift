@@ -19,6 +19,7 @@ class DrawView: UIView {
 	var numberStack: UIStackView!
 	
 	var canvasContainer: UIView!
+	var canvas: TouchDrawView!
 	
 	var clearButton: UIButton!
 	var wordBox: LabelBox!
@@ -80,9 +81,18 @@ class DrawView: UIView {
 			v.layer.cornerRadius = 20
 			v.layer.borderColor = Colors.text.cgColor
 			v.layer.borderWidth = 7
+			v.clipsToBounds = true
 			return v
 		}()
 		addSubview(canvasContainer)
+		
+		canvas = {
+			let c = TouchDrawView()
+			c.translatesAutoresizingMaskIntoConstraints = false
+			c.backgroundColor = .clear
+			return c
+		}()
+		canvasContainer.addSubview(canvas)
 		
 		clearButton = {
 			let b = UIButton()
@@ -141,6 +151,11 @@ class DrawView: UIView {
 		canvasContainer.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
 		canvasContainer.centerYAnchor.constraint(equalTo: margins.centerYAnchor).isActive = true
 		canvasContainer.heightAnchor.constraint(equalTo: canvasContainer.widthAnchor).isActive = true
+		
+		canvas.topAnchor.constraint(equalTo: canvasContainer.topAnchor).isActive = true
+		canvas.trailingAnchor.constraint(equalTo: canvasContainer.trailingAnchor).isActive = true
+		canvas.leadingAnchor.constraint(equalTo: canvasContainer.leadingAnchor).isActive = true
+		canvas.bottomAnchor.constraint(equalTo: canvasContainer.bottomAnchor).isActive = true
 		
 		clearButton.widthAnchor.constraint(equalTo: quitButton.widthAnchor).isActive = true
 		
