@@ -41,6 +41,8 @@ class TitleViewController: UIViewController {
 
 	@objc func didTouchSinglePlayerButton(sender: UIButton) {
 		print("Single player mode selected.")
+		GameManager.shared.prepareSinglePlayerGame()
+		navigationController?.pushViewController(NextWordViewController(), animated: true)
 	}
 	
 	@objc func didTouchMultiPlayerButton(sender: UIButton) {

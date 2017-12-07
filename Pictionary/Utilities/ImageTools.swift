@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import CoreML
 
 // [CITE] http://nshipster.com/image-resizing/
 class ImageTools {
@@ -198,32 +199,55 @@ class ImageTools {
 		return UIImage(cgImage: outputCGImage)
 	}
 	
+	static func convertToMLMultiArray(image: UIImage, invert: Bool = false) -> MLMultiArray? {
+		guard let cg = image.cgImage else {
+			print("[ImageTools.convertToGrayscale(image:)] failed to get CGImage.")
+			return nil
+		}
+		
+		let rect = CGRect(origin: .zero, size: CGSize(width: cg.width, height: cg.height))
+		let grayscale = CGColorSpace(name: CGColorSpace.linearGray)!
+		
+		guard let ctx = CGContext(
+			data: nil,
+			width: cg.width,
+			height: cg.height,
+			bitsPerComponent: 8,
+			bytesPerRow: cg.width, //Every pixel is 1 byte, 1 byte x cg.width = cg.width
+			space: grayscale,
+			bitmapInfo: CGImageAlphaInfo.none.rawValue
+			) else {
+				print("[ImageTools.scale(image:toExactly:)] could not initialize CGContext.")
+				return nil
+		}
+		
+		ctx.draw(cg, in: rect)
+		
+		var imageData = Data(bytes: ctx.data!, count: cg.width * cg.height).map { Double($0) }
+//		if invert {
+//			imageData = imageData.map { Int8(abs(Double($0)-255.0)) }
+//		}
+		
+		var imageMultiArray: MLMultiArray? = nil
+		imageData.withUnsafeMutableBytes { (pointer: UnsafeMutableRawBufferPointer) -> Void in
+			do {
+				imageMultiArray = try MLMultiArray.init(
+					dataPointer: pointer.baseAddress!,
+					shape: [1, 28, 28],
+					dataType: .double,
+					strides: [1, 28, 1],
+					deallocator: nil
+				)
+			} catch {
+				print("Cannot generate MLMultiArray from image. Stopping.")
+			}
+		}
+		
+		return imageMultiArray
+	}
+	
 	static func convertToCGImage(ciImage: CIImage) -> CGImage? {
 		return CIContext(options: nil).createCGImage(ciImage, from: ciImage.extent)
 	}
 	
-	// Doesn't quite work yet
-	
-	//	static func makeBitmapArray(from image: UIImage) -> [UInt8]? {
-	//		let grayscale = CGColorSpace(name: CGColorSpace.linearGray)!
-	//
-	//		guard image.cgImage?.colorSpace == grayscale else {
-	//			print("makeBitmapArray(from image:) only supports grayscale colorspace right now.")
-	//			print("Colorspace \(image.cgImage?.colorSpace.flatMap { String(describing: $0) } ?? "nil")")
-	//			return nil
-	//		}
-	//		guard let data = image.cgImage?.dataProvider?.data as Data? else {
-	//			print("Could not derive underlying data from UIImage")
-	//			return nil
-	//		}
-	//		let bytes = data.count / MemoryLayout<UInt8>.size
-	//		print("DataCount: \(data.count)")
-	//		print("UInt8.size: \(MemoryLayout<UInt8>.size)")
-	//		print("Bytes: \(bytes)")
-	//		var bitmapArray = [UInt8](repeating: 0, count: bytes)
-	//		let _ = bitmapArray.withUnsafeMutableBufferPointer { mutableBuffer in
-	//			data.copyBytes(to: mutableBuffer)
-	//		}
-	//		return bitmapArray
-	//	}
 }

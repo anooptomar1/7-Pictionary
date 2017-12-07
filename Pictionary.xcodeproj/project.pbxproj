@@ -10,6 +10,8 @@
 		27332BAD1FD749A700D9E46D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27332BAC1FD749A700D9E46D /* AppDelegate.swift */; };
 		27332BAF1FD749A700D9E46D /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27332BAE1FD749A700D9E46D /* TitleViewController.swift */; };
 		27332BB41FD749A700D9E46D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27332BB31FD749A700D9E46D /* Assets.xcassets */; };
+		275E09361FD9BF8F0000812F /* RandomClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275E09351FD9BF8F0000812F /* RandomClassifier.swift */; };
+		275E09381FD9C8720000812F /* Words.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275E09371FD9C8720000812F /* Words.swift */; };
 		276260FB1FD7B0F400EFB16F /* CARadialGradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276260FA1FD7B0F400EFB16F /* CARadialGradientLayer.swift */; };
 		276260FD1FD86ECD00EFB16F /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276260FC1FD86ECD00EFB16F /* TitleView.swift */; };
 		276260FF1FD888D600EFB16F /* NextWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276260FE1FD888D600EFB16F /* NextWordView.swift */; };
@@ -36,6 +38,8 @@
 		27332BAE1FD749A700D9E46D /* TitleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
 		27332BB31FD749A700D9E46D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27332BB81FD749A700D9E46D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		275E09351FD9BF8F0000812F /* RandomClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomClassifier.swift; sourceTree = "<group>"; };
+		275E09371FD9C8720000812F /* Words.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Words.swift; sourceTree = "<group>"; };
 		276260FA1FD7B0F400EFB16F /* CARadialGradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CARadialGradientLayer.swift; sourceTree = "<group>"; };
 		276260FC1FD86ECD00EFB16F /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		276260FE1FD888D600EFB16F /* NextWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextWordView.swift; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 				276261061FD8AE7600EFB16F /* GyroManager.swift */,
 				276261181FD903FB00EFB16F /* ImageTools.swift */,
 				2762611E1FD91D7800EFB16F /* GameManager.swift */,
+				275E09371FD9C8720000812F /* Words.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -168,6 +173,7 @@
 			children = (
 				2762611A1FD9044900EFB16F /* Classifier.swift */,
 				2762611C1FD91CEF00EFB16F /* CNNClassifier.swift */,
+				275E09351FD9BF8F0000812F /* RandomClassifier.swift */,
 			);
 			path = Classifier;
 			sourceTree = "<group>";
@@ -317,6 +323,8 @@
 				2762610B1FD8C96B00EFB16F /* DrawViewController.swift in Sources */,
 				278C4BB11FD78AEE00F57FD4 /* RoundButton.swift in Sources */,
 				276260FF1FD888D600EFB16F /* NextWordView.swift in Sources */,
+				275E09361FD9BF8F0000812F /* RandomClassifier.swift in Sources */,
+				275E09381FD9C8720000812F /* Words.swift in Sources */,
 				276261161FD9039A00EFB16F /* CNN.mlmodel in Sources */,
 				276261191FD903FB00EFB16F /* ImageTools.swift in Sources */,
 				27332BAF1FD749A700D9E46D /* TitleViewController.swift in Sources */,

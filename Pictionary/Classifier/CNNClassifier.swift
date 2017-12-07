@@ -12,41 +12,27 @@ import Vision
 
 class CNNClassifier: BaseDrawingClassifier {
 	
-	lazy var model = try? VNCoreMLModel(for: CNN().model)
+	lazy var model = CNN()
 	
 	override init() {
 		super.init()
 	}
-	override func classify(drawing: UIImage, callback: @escaping (Results)->()) {
-		guard let preparedImage = prepare(drawing: drawing) else {
+	override func classify(drawing: UIImage, callback: @escaping (String?,Results?)->()) {
+		guard let array = prepare(drawing: drawing) else {
 			print("Could not prepare image.")
+			callback(nil,nil)
 			return
 		}
-		guard let cgImage = preparedImage.cgImage else {
-			print("Could not get underlying cgImage")
-			return
-		}
-		guard let model = model else {
-			print("No model!")
-			return
-		}
-		let request = VNCoreMLRequest(model: model) { request, error in
-			guard let results = request.results as? [VNClassificationObservation] else {
-				print("unexpected result type from VNCoreMLRequest")
-				return
-			}
-			let resultsTuples = results.map { ($0.identifier, Double($0.confidence)) }
-			let resultsDict = Dictionary.init(uniqueKeysWithValues: resultsTuples)
-			callback(resultsDict)
-		}
-		request.imageCropAndScaleOption = .scaleFit
-		
-		let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
 		DispatchQueue.global(qos: .userInteractive).async {
 			do {
-				try handler.perform([request])
+				print(array)
+				let output = try self.model.prediction(drawing: array)
+				print(output.classLabel, output.output1[output.classLabel]!)
+				callback(output.classLabel, output.output1)
 			} catch {
-				print("VNImageRequestHandler.perform(_:) error: \(error)")
+				print("CNNClassifier error: \(error)")
+				print(" • \(error.localizedDescription)")
+				callback(nil,nil)
 			}
 		}
 	}

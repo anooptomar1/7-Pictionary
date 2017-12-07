@@ -11,42 +11,24 @@ import CoreML
 
 protocol DrawingClassifier {
 	typealias Results = [String: Double]
-	func classify(drawing: UIImage, callback: @escaping (Results)->())
+	func classify(drawing: UIImage, callback: @escaping (String?,Results?)->())
 }
 
 class BaseDrawingClassifier: DrawingClassifier {
 	static let imageSize: CGSize = CGSize(width: 28, height: 28)
-	
 	init() {}
 	
-	internal func prepare(drawing: UIImage) -> UIImage? {
-		// Shrink image to 28x28
-		guard let resizedDrawing = ImageTools.resize(image: drawing, to: BaseDrawingClassifier.imageSize) else {
-			print("Could not resize image.")
-			return nil
-		}
+	internal func prepare(drawing: UIImage) -> MLMultiArray? {
 		
-		// Composite image onto white matte, removing transparency (but not alpha channel).
-		guard let matteDrawing = ImageTools.convertAlpha(image: resizedDrawing, toMatte: .white) else {
-			print("Could not fill in image transparency.")
-			return nil
-		}
+		var d = ImageTools.resize(image: drawing, to: BaseDrawingClassifier.imageSize)
+		d = ImageTools.convertAlpha(image: d!, toMatte: .white)
+		d = ImageTools.invert(image: d!)
 		
-		// Convert to 8-bit single-channel grayscale (forcibly removes alpha, which is why we matte first).
-		guard let grayscaleDrawing = ImageTools.convertToGrayscale(image: matteDrawing) else {
-			print("Could not convert image to grayscale.")
-			return nil
-		}
-		
-		guard let invertedDrawing = ImageTools.invert(image: grayscaleDrawing) else {
-			print("Could not invert image.")
-			return nil
-		}
-		
-		return invertedDrawing
+		return ImageTools.convertToMLMultiArray(image: d!)
 	}
 	
-	func classify(drawing: UIImage, callback: @escaping (Results)->()) {
+	func classify(drawing: UIImage, callback: @escaping (String?,Results?)->()) {
 		print("classify(drawing:) is a stub in BaseDrawingClassifier.")
+		callback(nil,nil)
 	}
 }

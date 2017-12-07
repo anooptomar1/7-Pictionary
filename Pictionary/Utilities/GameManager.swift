@@ -14,11 +14,6 @@ protocol GameManagerDelegate {
 }
 
 class GameManager {
-	static let guessThreshold = 0.5
-	static let shared = GameManager()
-	
-	lazy var classifier: DrawingClassifier = CNNClassifier()
-	var delegate: GameManagerDelegate? = nil
 	
 	var currentCanvas: TouchDrawView? = nil {
 		didSet {
@@ -30,10 +25,23 @@ class GameManager {
 		}
 	}
 	
+	static let guessThreshold = 0.5
+	static let shared = GameManager()
+	var currentWord: String? = nil
+	lazy var classifier: DrawingClassifier = CNNClassifier()
+	var delegate: GameManagerDelegate? = nil
 	var canvasPollingTimer: Timer? = nil
+	var inGame = false
 	
-	private init() {
-		print("GameManager awake.")
+	private init() {}
+	
+	func prepareSinglePlayerGame() {
+		inGame = true
+		generateNextWord()
+	}
+	
+	func generateNextWord() {
+		currentWord = inGame ? Words.shared.random() : nil
 	}
 	
 	private func startPollingCanvas() {
@@ -43,16 +51,19 @@ class GameManager {
 			guard let canvas = self.currentCanvas else { return }
 			guard !canvas.exportStack().isEmpty else { return }
 			
-			self.classifier.classify(drawing: canvas.exportDrawing()) { results in
-				// Get the most confident prediction out of the Category,Confidence dictionary
-				let maxResult = results.reduce(into: (key:"",value:0.0)) { (result, element) in
-					if element.value > result.value {
-						result = element
-					}
+			self.classifier.classify(drawing: canvas.exportDrawing()) { bestWord, results in
+				guard
+					let bestWord = bestWord,
+					let results = results,
+					let bestConfidence = results[bestWord]
+				else {
+					print("No results.")
+					self.delegate?.modelDidGuess(nil)
+					return
 				}
-				print(maxResult)
-				if maxResult.value > GameManager.guessThreshold {
-					self.delegate?.modelDidGuess(maxResult.key)
+				
+				if bestConfidence > GameManager.guessThreshold {
+					self.delegate?.modelDidGuess(bestWord)
 				} else {
 					self.delegate?.modelDidGuess(nil)
 				}
@@ -61,7 +72,6 @@ class GameManager {
 	}
 	
 	private func stopPollingCanvas() {
-//		print("stopPollingCanvas")
 		canvasPollingTimer?.invalidate()
 		canvasPollingTimer = nil
 	}

@@ -14,7 +14,7 @@ class NextWordViewController: UIViewController {
 		return view as! NextWordView
 	}
 	
-	var gyroManager: GyroManager!
+	lazy var gyroManager = GyroManager()
 	
 	override func loadView() {
 		view = NextWordView(frame: UIScreen.main.bounds)
@@ -22,14 +22,9 @@ class NextWordViewController: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-		gyroManager = GyroManager()
-		gyroManager.onFlipDown {
-			self.nextWordView.flashCard(self.nextWordView.acceptCard)
-		}
-		gyroManager.onFlipUp {
-			self.nextWordView.flashCard(self.nextWordView.denyCard)
-		}
+        
+		gyroManager.onFlipDown(didAcceptWord)
+		gyroManager.onFlipUp(didDenyWord)
 		gyroManager.listen()
     }
 	
@@ -42,4 +37,11 @@ class NextWordViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 	
+	func didAcceptWord() {
+		self.nextWordView.flashCard(self.nextWordView.acceptCard)
+	}
+	
+	func didDenyWord() {
+		self.nextWordView.flashCard(self.nextWordView.denyCard)
+	}
 }
