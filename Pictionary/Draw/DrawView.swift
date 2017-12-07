@@ -180,6 +180,13 @@ class DrawView: UIView {
 		numberStack.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
 		numberStack.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
 		
+		winsBox.widthAnchor.constraint(equalTo: timerBox.widthAnchor).isActive = true
+		timerBox.widthAnchor.constraint(equalTo: lossesBox.widthAnchor).isActive = true
+		winsBox.heightAnchor.constraint(equalTo: timerBox.heightAnchor).isActive = true
+		timerBox.heightAnchor.constraint(equalTo: lossesBox.heightAnchor).isActive = true
+		lossesBox.heightAnchor.constraint(equalToConstant: 65).isActive = true
+		lossesBox.widthAnchor.constraint(equalToConstant: 85).isActive = true
+		
 		guessBox.heightAnchor.constraint(equalToConstant: 70).isActive = true
 		guessBox.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
 		guessBox.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true

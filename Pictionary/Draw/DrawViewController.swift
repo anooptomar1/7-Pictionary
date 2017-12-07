@@ -23,17 +23,46 @@ class DrawViewController: UIViewController {
 		}
 	}
 	
+	var wins: Int = 0 {
+		didSet {
+			drawView.winsBox.label.text = "\(wins)"
+		}
+	}
+	
+	var losses: Int = 0 {
+		didSet {
+			drawView.lossesBox.label.text = "\(losses)"
+		}
+	}
+	
+	var secondsRemaining: Int = 0 {
+		didSet {
+			drawView.timerBox.label.text = "\(secondsRemaining)"
+		}
+	}
+	
 	var drawView: DrawView { return view as! DrawView }
 	override func loadView() { view = DrawView(frame: UIScreen.main.bounds) }
 
+	/**********************************************/
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		drawView.clearButton.addTarget(nil, action: #selector(clearCanvas), for: .touchUpInside)
 		
 		GameManager.shared.currentCanvas = drawView.canvas
-		
 		currentGuess = nil
 		GameManager.shared.delegate = self
+		
+		wins = 0
+		losses = 0
+		secondsRemaining = 0
+		
+		Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+			self.wins = random(0...100)
+			self.losses = random(0...100)
+			self.secondsRemaining = random(0...100)
+		}
     }
 	
 	override func viewDidDisappear(_ animated: Bool) {
