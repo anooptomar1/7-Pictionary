@@ -11,6 +11,15 @@
 		27332BAF1FD749A700D9E46D /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27332BAE1FD749A700D9E46D /* TitleViewController.swift */; };
 		27332BB41FD749A700D9E46D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27332BB31FD749A700D9E46D /* Assets.xcassets */; };
 		276260FB1FD7B0F400EFB16F /* CARadialGradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276260FA1FD7B0F400EFB16F /* CARadialGradientLayer.swift */; };
+		276260FD1FD86ECD00EFB16F /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276260FC1FD86ECD00EFB16F /* TitleView.swift */; };
+		276260FF1FD888D600EFB16F /* NextWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276260FE1FD888D600EFB16F /* NextWordView.swift */; };
+		276261041FD88A9C00EFB16F /* NextWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276261031FD88A9C00EFB16F /* NextWordViewController.swift */; };
+		276261071FD8AE7600EFB16F /* GyroManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276261061FD8AE7600EFB16F /* GyroManager.swift */; };
+		276261091FD8BFF500EFB16F /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276261081FD8BFF500EFB16F /* Design.swift */; };
+		2762610B1FD8C96B00EFB16F /* DrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2762610A1FD8C96B00EFB16F /* DrawViewController.swift */; };
+		2762610E1FD8C9DB00EFB16F /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2762610D1FD8C9DB00EFB16F /* DrawView.swift */; };
+		276261101FD8CE1800EFB16F /* LabelBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2762610F1FD8CE1800EFB16F /* LabelBox.swift */; };
+		276261121FD8F78300EFB16F /* categories.txt in Resources */ = {isa = PBXBuildFile; fileRef = 276261111FD8F78300EFB16F /* categories.txt */; };
 		278C4BB11FD78AEE00F57FD4 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278C4BB01FD78AEE00F57FD4 /* RoundButton.swift */; };
 		9D0300AD743D5B8A5F34E283 /* Pods_Pictionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A9FC1D0722CD6DAAC1E90E /* Pods_Pictionary.framework */; };
 /* End PBXBuildFile section */
@@ -22,6 +31,15 @@
 		27332BB31FD749A700D9E46D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27332BB81FD749A700D9E46D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		276260FA1FD7B0F400EFB16F /* CARadialGradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CARadialGradientLayer.swift; sourceTree = "<group>"; };
+		276260FC1FD86ECD00EFB16F /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		276260FE1FD888D600EFB16F /* NextWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextWordView.swift; sourceTree = "<group>"; };
+		276261031FD88A9C00EFB16F /* NextWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextWordViewController.swift; sourceTree = "<group>"; };
+		276261061FD8AE7600EFB16F /* GyroManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroManager.swift; sourceTree = "<group>"; };
+		276261081FD8BFF500EFB16F /* Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
+		2762610A1FD8C96B00EFB16F /* DrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawViewController.swift; sourceTree = "<group>"; };
+		2762610D1FD8C9DB00EFB16F /* DrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
+		2762610F1FD8CE1800EFB16F /* LabelBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBox.swift; sourceTree = "<group>"; };
+		276261111FD8F78300EFB16F /* categories.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = categories.txt; sourceTree = "<group>"; };
 		278C4BB01FD78AEE00F57FD4 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		A60BE99F2BFBDC6233540D85 /* Pods-Pictionary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pictionary.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pictionary/Pods-Pictionary.debug.xcconfig"; sourceTree = "<group>"; };
 		A6D706F07E4CAB3E90B7098A /* Pods-Pictionary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pictionary.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pictionary/Pods-Pictionary.release.xcconfig"; sourceTree = "<group>"; };
@@ -51,6 +69,7 @@
 		27332BA01FD749A700D9E46D = {
 			isa = PBXGroup;
 			children = (
+				276261111FD8F78300EFB16F /* categories.txt */,
 				27332BAB1FD749A700D9E46D /* Pictionary */,
 				27332BAA1FD749A700D9E46D /* Products */,
 				85C89AAEA91C0BAB48EF8262 /* Pods */,
@@ -70,13 +89,61 @@
 			isa = PBXGroup;
 			children = (
 				27332BAC1FD749A700D9E46D /* AppDelegate.swift */,
-				27332BAE1FD749A700D9E46D /* TitleViewController.swift */,
-				276260FA1FD7B0F400EFB16F /* CARadialGradientLayer.swift */,
-				278C4BB01FD78AEE00F57FD4 /* RoundButton.swift */,
+				276261081FD8BFF500EFB16F /* Design.swift */,
+				276261001FD8890200EFB16F /* Title */,
+				276261011FD8890C00EFB16F /* Next Word */,
+				2762610C1FD8C97100EFB16F /* Draw */,
+				276261021FD8891300EFB16F /* Components */,
+				276261051FD8AE5900EFB16F /* Utilities */,
 				27332BB31FD749A700D9E46D /* Assets.xcassets */,
 				27332BB81FD749A700D9E46D /* Info.plist */,
 			);
 			path = Pictionary;
+			sourceTree = "<group>";
+		};
+		276261001FD8890200EFB16F /* Title */ = {
+			isa = PBXGroup;
+			children = (
+				27332BAE1FD749A700D9E46D /* TitleViewController.swift */,
+				276260FC1FD86ECD00EFB16F /* TitleView.swift */,
+			);
+			path = Title;
+			sourceTree = "<group>";
+		};
+		276261011FD8890C00EFB16F /* Next Word */ = {
+			isa = PBXGroup;
+			children = (
+				276261031FD88A9C00EFB16F /* NextWordViewController.swift */,
+				276260FE1FD888D600EFB16F /* NextWordView.swift */,
+			);
+			path = "Next Word";
+			sourceTree = "<group>";
+		};
+		276261021FD8891300EFB16F /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				276260FA1FD7B0F400EFB16F /* CARadialGradientLayer.swift */,
+				278C4BB01FD78AEE00F57FD4 /* RoundButton.swift */,
+				2762610F1FD8CE1800EFB16F /* LabelBox.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		276261051FD8AE5900EFB16F /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				276261061FD8AE7600EFB16F /* GyroManager.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		2762610C1FD8C97100EFB16F /* Draw */ = {
+			isa = PBXGroup;
+			children = (
+				2762610A1FD8C96B00EFB16F /* DrawViewController.swift */,
+				2762610D1FD8C9DB00EFB16F /* DrawView.swift */,
+			);
+			path = Draw;
 			sourceTree = "<group>";
 		};
 		85C89AAEA91C0BAB48EF8262 /* Pods */ = {
@@ -150,6 +217,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				276261121FD8F78300EFB16F /* categories.txt in Resources */,
 				27332BB41FD749A700D9E46D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,10 +283,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				276261071FD8AE7600EFB16F /* GyroManager.swift in Sources */,
+				276261091FD8BFF500EFB16F /* Design.swift in Sources */,
+				2762610E1FD8C9DB00EFB16F /* DrawView.swift in Sources */,
+				2762610B1FD8C96B00EFB16F /* DrawViewController.swift in Sources */,
 				278C4BB11FD78AEE00F57FD4 /* RoundButton.swift in Sources */,
+				276260FF1FD888D600EFB16F /* NextWordView.swift in Sources */,
 				27332BAF1FD749A700D9E46D /* TitleViewController.swift in Sources */,
 				276260FB1FD7B0F400EFB16F /* CARadialGradientLayer.swift in Sources */,
 				27332BAD1FD749A700D9E46D /* AppDelegate.swift in Sources */,
+				276260FD1FD86ECD00EFB16F /* TitleView.swift in Sources */,
+				276261101FD8CE1800EFB16F /* LabelBox.swift in Sources */,
+				276261041FD88A9C00EFB16F /* NextWordViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

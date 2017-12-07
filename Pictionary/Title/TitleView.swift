@@ -1,15 +1,15 @@
 //
-//  TitleViewController.swift
+//  TitleView.swift
 //  Pictionary
 //
-//  Created by Paul Herz on 2017-12-05.
+//  Created by Paul Herz on 2017-12-06.
 //  Copyright © 2017 Paul Herz. All rights reserved.
 //
 
 import UIKit
 
-class TitleViewController: UIViewController {
-	
+class TitleView: UIView {
+
 	var gradientBackgroundLayer: CARadialGradientLayer!
 	
 	var logoView: UIImageView!
@@ -20,19 +20,19 @@ class TitleViewController: UIViewController {
 	var buttonStack: UIStackView!
 	var attributionLabel: UILabel!
 	
-	override func viewDidLoad() {
-		super.viewDidLoad()
+	override init(frame: CGRect) {
+		super.init(frame: frame)
 		
-		view.backgroundColor = UIColor(red: 255/255, green: 201/255, blue: 66/255, alpha: 1.0)
+		backgroundColor = Colors.background
 		
 		gradientBackgroundLayer = {
 			let l = CARadialGradientLayer()
-			l.startColor = UIColor(red: 255/255, green: 244/255, blue: 135/255, alpha: 1.0).cgColor
-			l.endColor = UIColor(red: 255/255, green: 162/255, blue: 0/255, alpha: 1.0).cgColor
-			l.frame = view.layer.frame
+			l.startColor = Colors.gradientStart.cgColor
+			l.endColor = Colors.gradientEnd.cgColor
+			l.frame = layer.frame
 			return l
 		}()
-		view.layer.addSublayer(gradientBackgroundLayer)
+		layer.addSublayer(gradientBackgroundLayer)
 		
 		logoView = {
 			let iv = UIImageView()
@@ -60,7 +60,7 @@ class TitleViewController: UIViewController {
 			let s = UIStackView(arrangedSubviews: [
 				self.singlePlayerButton,
 				self.multiPlayerButton
-			])
+				])
 			s.translatesAutoresizingMaskIntoConstraints = false
 			s.axis = .vertical
 			s.spacing = 25.0
@@ -69,12 +69,13 @@ class TitleViewController: UIViewController {
 		
 		attributionLabel = {
 			let l = UILabel()
+			l.translatesAutoresizingMaskIntoConstraints = false
 			l.font = UIFont(name: "ArialRoundedMTBold", size: UIFont.systemFontSize)
 			l.textAlignment = .center
 			let now = Date()
 			let year = Calendar(identifier: .iso8601).ordinality(of: .year, in: .era, for: now)!
 			l.text = "©\(year) By Paul, Jake, and Justin"
-			l.textColor = UIColor(red: 96/255, green: 61/255, blue: 0/255, alpha: 1.0)
+			l.textColor = Colors.text
 			return l
 		}()
 		
@@ -90,31 +91,25 @@ class TitleViewController: UIViewController {
 			s.distribution = .equalSpacing
 			return s
 		}()
-		view.addSubview(stackView)
+		addSubview(stackView)
 		
-		updateViewConstraints()
+		setNeedsUpdateConstraints()
 	}
 	
-	override func updateViewConstraints() {
-		super.updateViewConstraints()
+	required init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+	
+	override func updateConstraints() {
+		super.updateConstraints()
 		
 		logoView.widthAnchor.constraint(equalTo: logoView.heightAnchor, multiplier: 1080/693, constant: 0.0).isActive = true
-//
-//		logoView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
-//		logoView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
-//
-		let margins = view.layoutMarginsGuide
+		
+		let margins = layoutMarginsGuide
 		stackView.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
 		stackView.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
 		stackView.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
 		stackView.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -20).isActive = true
 	}
-
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
-	}
-
-
+	
 }
-

@@ -16,8 +16,16 @@ class RoundButton: UIButton {
 	let cornerRadius: CGFloat = 20.0
 	let bottomOffset: CGFloat = 7
 	
-	let lightColor: CGColor = UIColor(red: 0.0, green: 155/255, blue: 1.0, alpha: 1.0).cgColor
-	let darkColor: CGColor = UIColor(red: 0.0, green: 128/255, blue: 206/255, alpha: 1.0).cgColor
+	var lightColor: CGColor = UIColor(red: 0.0, green: 155/255, blue: 1.0, alpha: 1.0).cgColor {
+		didSet {
+			
+		}
+	}
+	var darkColor: CGColor = UIColor(red: 0.0, green: 128/255, blue: 206/255, alpha: 1.0).cgColor {
+		didSet {
+			
+		}
+	}
 	
 	private var isActive: Bool = false {
 		didSet {
