@@ -37,6 +37,9 @@ struct Colors {
 	
 	// P3 rgb(114,0,0)
 	static let denyText = #colorLiteral(red: 0.491332233, green: 0, blue: 0, alpha: 1)
+	
+	// P3 rgb(0,122,255)
+	static let guessBackground = #colorLiteral(red: 0, green: 0.4877254367, blue: 1, alpha: 1)
 }
 
 struct Fonts {

@@ -18,6 +18,8 @@ class DrawView: UIView {
 	var lossesBox: LabelBox!
 	var numberStack: UIStackView!
 	
+	var guessBox: LabelBox!
+	
 	var canvasContainer: UIView!
 	var canvas: TouchDrawView!
 	
@@ -25,6 +27,8 @@ class DrawView: UIView {
 	var wordBox: LabelBox!
 	var quitButton: UIButton!
 	var bottomStack: UIStackView!
+	
+	var mainStack: UIStackView!
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -72,7 +76,19 @@ class DrawView: UIView {
 			s.distribution = .equalSpacing
 			return s
 		}()
-		addSubview(numberStack)
+//		addSubview(numberStack)
+		
+		guessBox = {
+			let b = LabelBox()
+			b.translatesAutoresizingMaskIntoConstraints = false
+			b.layer.cornerRadius = 35
+			b.backgroundColor = Colors.guessBackground
+			b.label.textColor = .white
+			b.label.text = "Is it CAT?"
+			b.label.textAlignment = .left
+			b.label.adjustsFontSizeToFitWidth = true
+			return b
+		}()
 		
 		canvasContainer = {
 			let v = UIView()
@@ -84,7 +100,7 @@ class DrawView: UIView {
 			v.clipsToBounds = true
 			return v
 		}()
-		addSubview(canvasContainer)
+//		addSubview(canvasContainer)
 		
 		canvas = {
 			let c = TouchDrawView()
@@ -130,7 +146,22 @@ class DrawView: UIView {
 			s.spacing = 15
 			return s
 		}()
-		addSubview(bottomStack)
+//		addSubview(bottomStack)
+		
+		mainStack = {
+			let s = UIStackView(arrangedSubviews: [
+				numberStack,
+				guessBox,
+				canvasContainer,
+				bottomStack
+			])
+			s.translatesAutoresizingMaskIntoConstraints = false
+			s.axis = .vertical
+			s.distribution = .equalSpacing
+			s.alignment = .center
+			return s
+		}()
+		addSubview(mainStack)
 		
 		setNeedsUpdateConstraints()
 	}
@@ -147,9 +178,13 @@ class DrawView: UIView {
 		numberStack.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
 		numberStack.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
 		
+		guessBox.heightAnchor.constraint(equalToConstant: 70).isActive = true
+		guessBox.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+		guessBox.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+		
 		canvasContainer.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
 		canvasContainer.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
-		canvasContainer.centerYAnchor.constraint(equalTo: margins.centerYAnchor).isActive = true
+//		canvasContainer.centerYAnchor.constraint(equalTo: margins.centerYAnchor).isActive = true
 		canvasContainer.heightAnchor.constraint(equalTo: canvasContainer.widthAnchor).isActive = true
 		
 		canvas.topAnchor.constraint(equalTo: canvasContainer.topAnchor).isActive = true
