@@ -127,6 +127,22 @@ class GameManager {
 	}
 	
 	@objc func quit() {
+		let alertController = UIAlertController(title: "Confirm quit", message: "Are you sure you want to quit?", preferredStyle: .alert)
+		
+		let cancelAction = UIAlertAction(title: "Cancel", style: .default) { action in
+			// nothing
+		}
+		alertController.addAction(cancelAction)
+		
+		let quitAction = UIAlertAction(title: "Quit", style: .cancel) { action in
+			self.forceQuit()
+		}
+		alertController.addAction(quitAction)
+		
+		navigationController?.present(alertController, animated: true) {}
+	}
+	
+	func forceQuit() {
 		gameState = .none
 		wins = 0
 		losses = 0
