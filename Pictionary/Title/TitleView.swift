@@ -36,14 +36,6 @@ class TitleView: UIView {
 		}()
 		layer.addSublayer(gradientBackgroundLayer)
 		
-		settingsButton = {
-			let b = PushButton()
-			b.translatesAutoresizingMaskIntoConstraints = false
-			b.setImage(UIImage(imageLiteralResourceName: "Settings"), for: .normal)
-			return b
-		}()
-		addSubview(settingsButton)
-		
 		logoView = {
 			let iv = UIImageView()
 			iv.translatesAutoresizingMaskIntoConstraints = false
@@ -103,6 +95,14 @@ class TitleView: UIView {
 		}()
 		addSubview(stackView)
 		
+		settingsButton = {
+			let b = PushButton()
+			b.translatesAutoresizingMaskIntoConstraints = false
+			b.setImage(UIImage(imageLiteralResourceName: "Settings"), for: .normal)
+			return b
+		}()
+		addSubview(settingsButton)
+		
 		setNeedsUpdateConstraints()
 	}
 	
@@ -115,8 +115,8 @@ class TitleView: UIView {
 		
 		let margins = layoutMarginsGuide
 		
-		settingsButton.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
-		settingsButton.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
+		settingsButton.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+		settingsButton.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
 		
 		logoView.widthAnchor.constraint(equalTo: logoView.heightAnchor, multiplier: 1080/693, constant: 0.0).isActive = true
 		
@@ -124,6 +124,8 @@ class TitleView: UIView {
 		stackView.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
 		stackView.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
 		stackView.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -20).isActive = true
+		
+		attributionLabel.centerYAnchor.constraint(equalTo: settingsButton.centerYAnchor).isActive = true
 	}
 	
 }
