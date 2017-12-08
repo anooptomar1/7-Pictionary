@@ -20,9 +20,9 @@ class NextWordViewController: UIViewController {
 		}
 	}
 	
-	override func loadView() {
-		view = NextWordView(frame: UIScreen.main.bounds)
-	}
+	private var impactFeedbackGenerator = UIImpactFeedbackGenerator()
+	
+	override func loadView() { view = NextWordView(frame: UIScreen.main.bounds) }
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,11 +48,15 @@ class NextWordViewController: UIViewController {
     }
 	
 	func didAcceptWord() {
+		impactFeedbackGenerator.impactOccurred()
 		self.nextWordView.flashCard(self.nextWordView.acceptCard)
-		GameManager.shared.goToNextPage()
+		Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { timer in
+			GameManager.shared.goToNextPage()
+		}
 	}
 	
 	func didDenyWord() {
+		impactFeedbackGenerator.impactOccurred()
 		self.nextWordView.flashCard(self.nextWordView.denyCard)
 		GameManager.shared.generateNextWord()
 	}

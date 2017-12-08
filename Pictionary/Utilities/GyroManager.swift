@@ -94,6 +94,8 @@ class GyroManager {
 	func stop() {
 		manager.stopGyroUpdates()
 		manager.stopAccelerometerUpdates()
+		flipUpCallback = nil
+		flipDownCallback = nil
 	}
 	
 	func onFlipUp(_ callback: @escaping Callback) {

@@ -26,11 +26,11 @@ class CNNClassifier: BaseDrawingClassifier {
 		DispatchQueue.global(qos: .userInteractive).async {
 			do {
 				let output = try self.model.prediction(drawing: array)
-				print(output.classLabel, output.output1[output.classLabel]!)
+//				print(output.classLabel, output.output1[output.classLabel]!)
 				callback(output.classLabel, output.output1)
 			} catch {
 				print("CNNClassifier error: \(error)")
-				print(" • \(error.localizedDescription)")
+//				print(" • \(error.localizedDescription)")
 				callback(nil,nil)
 			}
 		}

@@ -17,7 +17,7 @@ protocol GameManagerDelegate {
 }
 
 enum GameState {
-	case none, choosingWord, drawing
+	case none, choosingWord, drawing, postDrawing(win: Bool)
 }
 
 class GameManager {
@@ -47,8 +47,16 @@ class GameManager {
 	var secondsRemaining: Int? = nil
 	var countdownTimer: Timer? = nil
 	
+	var wins: Int = 0
+	var losses: Int = 0
+	
 	private var singlePlayer = true
-	private var gameState: GameState = .none
+	private var gameState: GameState = .none {
+		didSet {
+			print("gameState: \(String(describing: gameState))")
+			delegate?.gameStateDidChange(gameState)
+		}
+	}
 	
 	private init() {}
 	
@@ -59,7 +67,7 @@ class GameManager {
 	}
 	
 	func generateNextWord() {
-		if gameState == .none {
+		if case .none = gameState {
 			currentWord = nil
 		} else {
 			currentWord = Words.shared.random()
@@ -67,20 +75,29 @@ class GameManager {
 	}
 	
 	func startCountdown() {
-		let gameLength = 30
+		
+		let gameLength = 10
+		
 		self.secondsRemaining = gameLength
 		self.delegate?.countdownDidUpdate(secondsRemaining: self.secondsRemaining)
-		print("\(String(describing: self.secondsRemaining) ?? "—")")
 		countdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
 			self.secondsRemaining = self.secondsRemaining! - 1
 			self.delegate?.countdownDidUpdate(secondsRemaining: self.secondsRemaining)
-			print("\(String(describing: self.secondsRemaining) ?? "—")")
-			if self.secondsRemaining == 0 { self.secondsRemaining = nil; self.stopCountdown() }
+			if self.secondsRemaining == 0 {
+				self.secondsRemaining = nil
+				self.stopCountdown()
+				print("Time's up")
+				if case .drawing = self.gameState {
+					self.gameState = .postDrawing(win: false)
+					self.losses += 1
+				} else {
+					print("Warning: timer ran out in state other than drawing: \(String(describing: self.gameState))")
+				}
+			}
 		}
 	}
 	
 	func stopCountdown() {
-		print("STOP")
 		countdownTimer?.invalidate()
 		countdownTimer = nil
 	}
@@ -98,14 +115,21 @@ class GameManager {
 		case .none:
 			return nil
 		case .choosingWord:
+			gameState = .drawing
 			return DrawViewController()
 		case .drawing:
 			return nil
+		case .postDrawing:
+			gameState = .choosingWord
+			generateNextWord()
+			return NextWordViewController()
 		}
 	}
 	
 	@objc func quit() {
 		gameState = .none
+		wins = 0
+		losses = 0
 		stopCountdown()
 		navigationController?.popToRootViewController(animated: true)
 	}
@@ -113,6 +137,7 @@ class GameManager {
 	private func startPollingCanvas() {
 		
 		canvasPollingTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
+			guard case .drawing = self.gameState else { return }
 			guard let canvas = self.currentCanvas else { return }
 			guard !canvas.exportStack().isEmpty else { return }
 			

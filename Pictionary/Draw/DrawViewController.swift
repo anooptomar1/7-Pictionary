@@ -70,8 +70,8 @@ class DrawViewController: UIViewController {
 		
 		currentWord = GameManager.shared.currentWord
 		
-		wins = 0
-		losses = 0
+		wins = GameManager.shared.wins
+		losses = GameManager.shared.losses
 		secondsRemaining = 0
 		
 		GameManager.shared.startCountdown()
@@ -93,7 +93,23 @@ class DrawViewController: UIViewController {
 }
 
 extension DrawViewController: GameManagerDelegate {
-	func gameStateDidChange(_ gameState: GameState) {}
+	func gameStateDidChange(_ gameState: GameState) {
+		if case .postDrawing(let win) = gameState {
+			// Time's up or model guessed right,
+			// freeze the erase button and the canvas.
+			print("DrawViewController .postDrawing win=\(win)")
+			drawView.canvasContainer.isUserInteractionEnabled = false
+			drawView.clearButton.isEnabled = false
+			if win {
+				wins += 1
+			} else {
+				losses += 1
+			}
+			Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
+				GameManager.shared.goToNextPage()
+			}
+		}
+	}
 	func currentWordDidUpdate(_ currentWord: String?) {}
 	
 	func modelDidGuess(_ guess: String?) {
