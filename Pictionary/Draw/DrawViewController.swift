@@ -35,9 +35,13 @@ class DrawViewController: UIViewController {
 		}
 	}
 	
-	var secondsRemaining: Int = 0 {
+	var secondsRemaining: Int? = nil {
 		didSet {
-			drawView.timerBox.label.text = "\(secondsRemaining)"
+			if let secondsRemaining = secondsRemaining {
+				drawView.timerBox.label.text = "\(secondsRemaining)"
+			} else {
+				drawView.timerBox.label.text = "—"
+			}
 		}
 	}
 	
@@ -58,11 +62,7 @@ class DrawViewController: UIViewController {
 		losses = 0
 		secondsRemaining = 0
 		
-		Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-			self.wins = random(0...100)
-			self.losses = random(0...100)
-			self.secondsRemaining = random(0...100)
-		}
+		GameManager.shared.startCountdown()
     }
 	
 	override func viewDidDisappear(_ animated: Bool) {
@@ -83,5 +83,8 @@ class DrawViewController: UIViewController {
 extension DrawViewController: GameManagerDelegate {
 	func modelDidGuess(_ guess: String?) {
 		currentGuess = guess
+	}
+	func countdownDidUpdate(secondsRemaining: Int?) {
+		self.secondsRemaining = secondsRemaining
 	}
 }

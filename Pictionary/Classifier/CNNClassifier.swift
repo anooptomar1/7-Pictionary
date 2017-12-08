@@ -25,7 +25,6 @@ class CNNClassifier: BaseDrawingClassifier {
 		}
 		DispatchQueue.global(qos: .userInteractive).async {
 			do {
-				print(array)
 				let output = try self.model.prediction(drawing: array)
 				print(output.classLabel, output.output1[output.classLabel]!)
 				callback(output.classLabel, output.output1)

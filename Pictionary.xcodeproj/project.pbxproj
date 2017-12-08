@@ -10,6 +10,7 @@
 		27332BAD1FD749A700D9E46D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27332BAC1FD749A700D9E46D /* AppDelegate.swift */; };
 		27332BAF1FD749A700D9E46D /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27332BAE1FD749A700D9E46D /* TitleViewController.swift */; };
 		27332BB41FD749A700D9E46D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27332BB31FD749A700D9E46D /* Assets.xcassets */; };
+		27518EEC1FDA3A2C00E792B1 /* PushButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27518EEB1FDA3A2C00E792B1 /* PushButton.swift */; };
 		275E09361FD9BF8F0000812F /* RandomClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275E09351FD9BF8F0000812F /* RandomClassifier.swift */; };
 		275E09381FD9C8720000812F /* Words.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275E09371FD9C8720000812F /* Words.swift */; };
 		276260FB1FD7B0F400EFB16F /* CARadialGradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276260FA1FD7B0F400EFB16F /* CARadialGradientLayer.swift */; };
@@ -38,6 +39,7 @@
 		27332BAE1FD749A700D9E46D /* TitleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
 		27332BB31FD749A700D9E46D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27332BB81FD749A700D9E46D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27518EEB1FDA3A2C00E792B1 /* PushButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushButton.swift; sourceTree = "<group>"; };
 		275E09351FD9BF8F0000812F /* RandomClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomClassifier.swift; sourceTree = "<group>"; };
 		275E09371FD9C8720000812F /* Words.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Words.swift; sourceTree = "<group>"; };
 		276260FA1FD7B0F400EFB16F /* CARadialGradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CARadialGradientLayer.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				276260FA1FD7B0F400EFB16F /* CARadialGradientLayer.swift */,
 				278C4BB01FD78AEE00F57FD4 /* RoundButton.swift */,
 				2762610F1FD8CE1800EFB16F /* LabelBox.swift */,
+				27518EEB1FDA3A2C00E792B1 /* PushButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				276261191FD903FB00EFB16F /* ImageTools.swift in Sources */,
 				27332BAF1FD749A700D9E46D /* TitleViewController.swift in Sources */,
 				276260FB1FD7B0F400EFB16F /* CARadialGradientLayer.swift in Sources */,
+				27518EEC1FDA3A2C00E792B1 /* PushButton.swift in Sources */,
 				27332BAD1FD749A700D9E46D /* AppDelegate.swift in Sources */,
 				276260FD1FD86ECD00EFB16F /* TitleView.swift in Sources */,
 				2762611D1FD91CEF00EFB16F /* CNNClassifier.swift in Sources */,

@@ -11,6 +11,7 @@ import TouchDraw
 
 protocol GameManagerDelegate {
 	func modelDidGuess(_ guess: String?)
+	func countdownDidUpdate(secondsRemaining: Int?)
 }
 
 class GameManager {
@@ -32,6 +33,7 @@ class GameManager {
 	var delegate: GameManagerDelegate? = nil
 	var canvasPollingTimer: Timer? = nil
 	var inGame = false
+	var secondsRemaining: Int? = nil
 	
 	private init() {}
 	
@@ -44,8 +46,18 @@ class GameManager {
 		currentWord = inGame ? Words.shared.random() : nil
 	}
 	
+	func startCountdown() {
+		let gameLength = 10
+		self.secondsRemaining = gameLength
+		self.delegate?.countdownDidUpdate(secondsRemaining: self.secondsRemaining)
+		Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+			self.secondsRemaining = self.secondsRemaining! - 1
+			self.delegate?.countdownDidUpdate(secondsRemaining: self.secondsRemaining)
+			if self.secondsRemaining == 0 { self.secondsRemaining = nil; timer.invalidate() }
+		}
+	}
+	
 	private func startPollingCanvas() {
-//		print("startPollingCanvas")
 		
 		canvasPollingTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
 			guard let canvas = self.currentCanvas else { return }

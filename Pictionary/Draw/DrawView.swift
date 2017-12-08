@@ -111,13 +111,15 @@ class DrawView: UIView {
 		canvasContainer.addSubview(canvas)
 		
 		clearButton = {
-			let b = UIButton()
+			let b = PushButton()
 			b.translatesAutoresizingMaskIntoConstraints = false
 //			b.setTitle("Clear", for: .normal)
 			b.setImage(UIImage(imageLiteralResourceName: "Clear"), for: .normal)
+			b.imageView?.translatesAutoresizingMaskIntoConstraints = false
 			b.setContentCompressionResistancePriority(.required, for: .horizontal)
 			return b
 		}()
+		addSubview(clearButton)
 		
 		wordBox = {
 			let b = LabelBox()
@@ -129,33 +131,25 @@ class DrawView: UIView {
 			b.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
 			return b
 		}()
+		addSubview(wordBox)
 		
 		quitButton = {
-			let b = UIButton()
+			let b = PushButton()
 			b.translatesAutoresizingMaskIntoConstraints = false
 //			b.setTitle("Quit", for: .normal)
 			b.setImage(UIImage(imageLiteralResourceName: "Quit"), for: .normal)
+			b.imageView?.translatesAutoresizingMaskIntoConstraints = false
 			b.setContentCompressionResistancePriority(.required, for: .horizontal)
 			return b
 		}()
-		
-		bottomStack = {
-			let s = UIStackView(arrangedSubviews: [ clearButton, wordBox, quitButton ])
-			s.translatesAutoresizingMaskIntoConstraints = false
-			s.axis = .horizontal
-			s.distribution = .equalSpacing
-//			s.alignment = .top
-			s.spacing = 15
-			return s
-		}()
-//		addSubview(bottomStack)
+		addSubview(quitButton)
 		
 		mainStack = {
 			let s = UIStackView(arrangedSubviews: [
 				numberStack,
 				guessBox,
 				canvasContainer,
-				bottomStack
+				UIView()
 			])
 			s.translatesAutoresizingMaskIntoConstraints = false
 			s.axis = .vertical
@@ -193,7 +187,6 @@ class DrawView: UIView {
 		
 		canvasContainer.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
 		canvasContainer.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
-//		canvasContainer.centerYAnchor.constraint(equalTo: margins.centerYAnchor).isActive = true
 		canvasContainer.heightAnchor.constraint(equalTo: canvasContainer.widthAnchor).isActive = true
 		
 		canvas.topAnchor.constraint(equalTo: canvasContainer.topAnchor).isActive = true
@@ -201,10 +194,35 @@ class DrawView: UIView {
 		canvas.leadingAnchor.constraint(equalTo: canvasContainer.leadingAnchor).isActive = true
 		canvas.bottomAnchor.constraint(equalTo: canvasContainer.bottomAnchor).isActive = true
 		
-		clearButton.widthAnchor.constraint(equalTo: quitButton.widthAnchor).isActive = true
+		mainStack.bottomAnchor.constraint(equalTo: wordBox.topAnchor, constant: -30).isActive = true
 		
-		bottomStack.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -15).isActive = true
-		bottomStack.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
-		bottomStack.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+		clearButton.widthAnchor.constraint(equalTo: quitButton.widthAnchor).isActive = true
+		clearButton.heightAnchor.constraint(equalTo: quitButton.heightAnchor).isActive = true
+		quitButton.widthAnchor.constraint(equalTo: quitButton.heightAnchor).isActive = true
+		clearButton.topAnchor.constraint(equalTo: quitButton.topAnchor).isActive = true
+		quitButton.topAnchor.constraint(equalTo: wordBox.topAnchor).isActive = true
+		
+		clearButton.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+		quitButton.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+		
+		// Must remove default vertical centering of button image before recentering
+		for b in [clearButton, quitButton] {
+			guard let b = b, let iv = b.imageView else { continue }
+			let oldConstraints = b.constraints.filter {
+				$0.firstAnchor == iv.centerYAnchor || $0.secondAnchor == iv.centerYAnchor
+			}
+			b.removeConstraints(oldConstraints)
+			iv.centerYAnchor.constraint(equalTo: wordBox.centerYAnchor).isActive = true
+		}
+		
+		clearButton.trailingAnchor.constraint(lessThanOrEqualTo: wordBox.leadingAnchor, constant: 0).isActive = true
+		quitButton.leadingAnchor.constraint(greaterThanOrEqualTo: wordBox.trailingAnchor, constant: 0).isActive = true
+		
+		clearButton.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+		quitButton.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+		
+		wordBox.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+		wordBox.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -15).isActive = true
+		wordBox.heightAnchor.constraint(equalToConstant: 65).isActive = true
 	}
 }
