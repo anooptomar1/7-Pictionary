@@ -76,7 +76,7 @@ class GameManager {
 	
 	func startCountdown() {
 		
-		let gameLength = 10
+		let gameLength = 15
 		
 		self.secondsRemaining = gameLength
 		self.delegate?.countdownDidUpdate(secondsRemaining: self.secondsRemaining)
@@ -153,9 +153,9 @@ class GameManager {
 				}
 				
 				if bestConfidence > GameManager.guessThreshold {
-					self.delegate?.modelDidGuess(bestWord)
+					self.modelDidGuess(bestWord)
 				} else {
-					self.delegate?.modelDidGuess(nil)
+					self.modelDidGuess(nil)
 				}
 			}
 		}
@@ -164,5 +164,17 @@ class GameManager {
 	private func stopPollingCanvas() {
 		canvasPollingTimer?.invalidate()
 		canvasPollingTimer = nil
+	}
+	
+	private func modelDidGuess(_ word: String?) {
+		self.delegate?.modelDidGuess(word)
+		guard word != nil else { return }
+		if word == currentWord {
+			if case .drawing = gameState {} else { print("Warning: postDrawing entered from non-drawing state") }
+			stopCountdown()
+			stopPollingCanvas()
+			gameState = .postDrawing(win: true)
+			self.wins += 1
+		}
 	}
 }

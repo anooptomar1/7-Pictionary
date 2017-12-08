@@ -34,7 +34,9 @@ class DrawViewController: UIViewController {
 	
 	var wins: Int = 0 {
 		didSet {
-			drawView.winsBox.label.text = "\(wins)"
+			DispatchQueue.main.async {
+				self.drawView.winsBox.label.text = "\(self.wins)"
+			}
 		}
 	}
 	
@@ -46,10 +48,12 @@ class DrawViewController: UIViewController {
 	
 	var secondsRemaining: Int? = nil {
 		didSet {
-			if let secondsRemaining = secondsRemaining {
-				drawView.timerBox.label.text = "\(secondsRemaining)"
-			} else {
-				drawView.timerBox.label.text = "—"
+			DispatchQueue.main.async {
+				if let secondsRemaining = self.secondsRemaining {
+					self.drawView.timerBox.label.text = "\(secondsRemaining)"
+				} else {
+					self.drawView.timerBox.label.text = "—"
+				}
 			}
 		}
 	}
@@ -98,15 +102,19 @@ extension DrawViewController: GameManagerDelegate {
 			// Time's up or model guessed right,
 			// freeze the erase button and the canvas.
 			print("DrawViewController .postDrawing win=\(win)")
-			drawView.canvasContainer.isUserInteractionEnabled = false
-			drawView.clearButton.isEnabled = false
+			DispatchQueue.main.async {
+				self.drawView.canvasContainer.isUserInteractionEnabled = false
+				self.drawView.clearButton.isEnabled = false
+			}
 			if win {
 				wins += 1
 			} else {
 				losses += 1
 			}
-			Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
-				GameManager.shared.goToNextPage()
+			DispatchQueue.main.async {
+				Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
+					GameManager.shared.goToNextPage()
+				}
 			}
 		}
 	}

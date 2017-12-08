@@ -23,7 +23,7 @@ class CNNClassifier: BaseDrawingClassifier {
 			callback(nil,nil)
 			return
 		}
-		DispatchQueue.global(qos: .userInteractive).async {
+		DispatchQueue.global(qos: .userInitiated).async {
 			do {
 				let output = try self.model.prediction(drawing: array)
 //				print(output.classLabel, output.output1[output.classLabel]!)
