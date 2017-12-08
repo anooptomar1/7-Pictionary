@@ -15,6 +15,7 @@
 		27518EF11FDA992E00E792B1 /* PassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27518EF01FDA992E00E792B1 /* PassView.swift */; };
 		27518EF31FDAA8CB00E792B1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27518EF21FDAA8CB00E792B1 /* SettingsViewController.swift */; };
 		27518EF51FDAA91D00E792B1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27518EF41FDAA91D00E792B1 /* SettingsView.swift */; };
+		27518EF71FDAAC9800E792B1 /* RandomForestClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27518EF61FDAAC9800E792B1 /* RandomForestClassifier.swift */; };
 		275E09361FD9BF8F0000812F /* RandomClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275E09351FD9BF8F0000812F /* RandomClassifier.swift */; };
 		275E09381FD9C8720000812F /* Words.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275E09371FD9C8720000812F /* Words.swift */; };
 		276260FB1FD7B0F400EFB16F /* CARadialGradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276260FA1FD7B0F400EFB16F /* CARadialGradientLayer.swift */; };
@@ -48,6 +49,7 @@
 		27518EF01FDA992E00E792B1 /* PassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassView.swift; sourceTree = "<group>"; };
 		27518EF21FDAA8CB00E792B1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		27518EF41FDAA91D00E792B1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		27518EF61FDAAC9800E792B1 /* RandomForestClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomForestClassifier.swift; sourceTree = "<group>"; };
 		275E09351FD9BF8F0000812F /* RandomClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomClassifier.swift; sourceTree = "<group>"; };
 		275E09371FD9C8720000812F /* Words.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Words.swift; sourceTree = "<group>"; };
 		276260FA1FD7B0F400EFB16F /* CARadialGradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CARadialGradientLayer.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				2762611A1FD9044900EFB16F /* Classifier.swift */,
 				2762611C1FD91CEF00EFB16F /* CNNClassifier.swift */,
 				275E09351FD9BF8F0000812F /* RandomClassifier.swift */,
+				27518EF61FDAAC9800E792B1 /* RandomForestClassifier.swift */,
 			);
 			path = Classifier;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				27518EF51FDAA91D00E792B1 /* SettingsView.swift in Sources */,
 				276260FB1FD7B0F400EFB16F /* CARadialGradientLayer.swift in Sources */,
 				27518EEC1FDA3A2C00E792B1 /* PushButton.swift in Sources */,
+				27518EF71FDAAC9800E792B1 /* RandomForestClassifier.swift in Sources */,
 				27332BAD1FD749A700D9E46D /* AppDelegate.swift in Sources */,
 				276260FD1FD86ECD00EFB16F /* TitleView.swift in Sources */,
 				27518EEF1FDA98C400E792B1 /* PassViewController.swift in Sources */,

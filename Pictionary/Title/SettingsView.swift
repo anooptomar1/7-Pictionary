@@ -11,6 +11,8 @@ import UIKit
 class SettingsView: UIView {
 	
 	var gradientBackgroundLayer: CALayer!
+	var networkSwitch: UISwitch!
+	var switchStack: UIStackView!
 	var confirmButton: RoundButton!
 	
 	override init(frame: CGRect) {
@@ -27,17 +29,35 @@ class SettingsView: UIView {
 		}()
 		layer.addSublayer(gradientBackgroundLayer)
 		
-//		testLabel = {
-//			let l = UILabel()
-//			l.translatesAutoresizingMaskIntoConstraints = false
-//			l.font = Fonts.defaultFont.withSize(1.6 * Fonts.em)
-//			l.textAlignment = .center
-//			l.text = "Your group is battling against the computer. If you guess right, flick the phone towards you.\n\nPass me to the next drawer."
-//			l.numberOfLines = 0
-//			l.lineBreakMode = .byWordWrapping
-//			return l
-//		}()
-//		addSubview(testLabel)
+		networkSwitch = {
+			let sw = UISwitch()
+			sw.translatesAutoresizingMaskIntoConstraints = false
+			return sw
+		}()
+		
+		switchStack = {
+			let l1 = UILabel()
+			l1.translatesAutoresizingMaskIntoConstraints = false
+			l1.textAlignment = .center
+			l1.font = Fonts.defaultFont.withSize(1.25 * Fonts.em)
+			l1.textColor = Colors.text
+			l1.text = "CNN"
+			
+			let l2 = UILabel()
+			l2.translatesAutoresizingMaskIntoConstraints = false
+			l2.textAlignment = .center
+			l2.font = Fonts.defaultFont.withSize(1.25 * Fonts.em)
+			l2.textColor = Colors.text
+			l2.text = "RF"
+			let s = UIStackView(arrangedSubviews: [
+				UIView(), l1, networkSwitch, l2, UIView()
+			])
+			s.translatesAutoresizingMaskIntoConstraints = false
+			s.axis = .horizontal
+			s.distribution = .equalCentering
+			return s
+		}()
+		addSubview(switchStack)
 		
 		confirmButton = {
 			let r = RoundButton()
@@ -58,6 +78,10 @@ class SettingsView: UIView {
 		super.updateConstraints()
 		
 		let margins = layoutMarginsGuide
+		
+		switchStack.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+		switchStack.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+		switchStack.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
 		
 		confirmButton.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
 		confirmButton.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true

@@ -17,7 +17,12 @@ class SettingsViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		DispatchQueue.main.async {
+			self.settingsView.networkSwitch.isOn = GameManager.shared.isRandomForest
+		}
+		
 		settingsView.confirmButton.addTarget(self, action: #selector(didPressConfirm), for: .touchUpInside)
+		settingsView.networkSwitch.addTarget(self, action: #selector(switchChanged(sender:)), for: .valueChanged)
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -27,6 +32,11 @@ class SettingsViewController: UIViewController {
 	
 	@objc func didPressConfirm() {
 		dismiss(animated: true, completion: nil)
+	}
+	
+	@objc func switchChanged(sender: UISwitch) {
+		print("switchChanged: \(sender.isOn)")
+		GameManager.shared.isRandomForest = sender.isOn
 	}
 }
 

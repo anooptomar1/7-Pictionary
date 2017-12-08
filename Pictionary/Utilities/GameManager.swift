@@ -41,7 +41,18 @@ class GameManager {
 			delegate?.currentWordDidUpdate(currentWord)
 		}
 	}
-	lazy var classifier: DrawingClassifier = CNNClassifier()
+	var isRandomForest = false {
+		didSet {
+			if isRandomForest {
+				print("Switching to RF classifier")
+				classifier = RandomForestClassifier()
+			} else {
+				print("Switching to CNN classifier")
+				classifier = CNNClassifier()
+			}
+		}
+	}
+	var classifier: DrawingClassifier = CNNClassifier()
 	var delegate: GameManagerDelegate? = nil
 	var canvasPollingTimer: Timer? = nil
 	var secondsRemaining: Int? = nil
@@ -78,7 +89,7 @@ class GameManager {
 	
 	func startCountdown() {
 		
-		let gameLength = 15
+		let gameLength = 20
 		
 		self.secondsRemaining = gameLength
 		self.delegate?.countdownDidUpdate(secondsRemaining: self.secondsRemaining)

@@ -17,6 +17,8 @@ class PassViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		GyroManager.shared.stop()
+		
 		passView.quitButton.addTarget(GameManager.shared, action: #selector(GameManager.quit), for: .touchUpInside)
 		passView.confirmButton.addTarget(GameManager.shared, action: #selector(GameManager.goToNextPage), for: .touchUpInside)
 	}

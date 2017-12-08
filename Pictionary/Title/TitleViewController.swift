@@ -21,6 +21,8 @@ class TitleViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		GyroManager.shared.stop()
+		
 		titleView.singlePlayerButton.addTarget(
 			self,
 			action: #selector(didTouchSinglePlayerButton(sender:)),

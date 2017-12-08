@@ -38,9 +38,9 @@ class NextWordViewController: UIViewController {
 		GyroManager.shared.listen()
     }
 	
-	override func viewDidDisappear(_ animated: Bool) {
-		GyroManager.shared.stop()
-	}
+//	override func viewDidDisappear(_ animated: Bool) {
+//		GyroManager.shared.stop()
+//	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

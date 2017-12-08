@@ -84,24 +84,26 @@ class DrawViewController: UIViewController {
 		losses = GameManager.shared.losses
 		secondsRemaining = 0
 		
-//		if !GameManager.shared.singlePlayer {
-//			GyroManager.shared.onFlipDown {
-//				GameManager.shared.didReceiveGuessGesture()
-//			}
-//			GyroManager.shared.listen()
-//		}
+		
 		
 		GameManager.shared.startCountdown()
 		
-		GyroManager.shared.onFlipDown {
-			print("GESTURE")
+		GyroManager.shared.onFlipDown {}
+		GyroManager.shared.onFlipUp {}
+		
+		if !GameManager.shared.singlePlayer {
+			GyroManager.shared.onFlipDown {
+				print("GESTURE")
+				GameManager.shared.didReceiveGuessGesture()
+			}
+			GyroManager.shared.listen()
 		}
 		GyroManager.shared.listen()
     }
 	
 	override func viewDidDisappear(_ animated: Bool) {
 		GameManager.shared.currentCanvas = nil
-		GyroManager.shared.stop()
+//		GyroManager.shared.stop()
 	}
 
     override func didReceiveMemoryWarning() {
