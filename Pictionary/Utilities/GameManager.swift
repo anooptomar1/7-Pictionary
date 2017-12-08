@@ -17,7 +17,7 @@ protocol GameManagerDelegate {
 }
 
 enum GameState {
-	case none, choosingWord, drawing, postDrawing(win: Bool)
+	case none, choosingWord, drawing, postDrawing(win: Bool), waitForPass
 }
 
 class GameManager {
@@ -50,7 +50,7 @@ class GameManager {
 	var wins: Int = 0
 	var losses: Int = 0
 	
-	private var singlePlayer = true
+	private(set) var singlePlayer = true
 	private var gameState: GameState = .none {
 		didSet {
 			print("gameState: \(String(describing: gameState))")
@@ -62,16 +62,18 @@ class GameManager {
 	
 	func prepareSinglePlayerGame() {
 		singlePlayer = true
-		gameState = .choosingWord
 		generateNextWord()
+		goToNextPage()
+	}
+	
+	func prepareMultiPlayerGame() {
+		singlePlayer = false
+		generateNextWord()
+		goToNextPage()
 	}
 	
 	func generateNextWord() {
-		if case .none = gameState {
-			currentWord = nil
-		} else {
-			currentWord = Words.shared.random()
-		}
+		currentWord = Words.shared.random()
 	}
 	
 	func startCountdown() {
@@ -89,7 +91,7 @@ class GameManager {
 				print("Time's up")
 				if case .drawing = self.gameState {
 					self.gameState = .postDrawing(win: false)
-					self.losses += 1
+					if self.singlePlayer { self.losses += 1 }
 				} else {
 					print("Warning: timer ran out in state other than drawing: \(String(describing: self.gameState))")
 				}
@@ -102,18 +104,25 @@ class GameManager {
 		countdownTimer = nil
 	}
 	
-	func goToNextPage() {
-		guard let next = nextPageSinglePlayer() else {
-			print("Couldn't get next page in game state \(String(describing: gameState))")
+	@objc func goToNextPage() {
+		var next: UIViewController? = nil
+		if singlePlayer {
+			next = nextPageSinglePlayer()
+		} else {
+			next = nextPageMultiPlayer()
+		}
+		guard let nextController = next else {
+			print("Could not get next page...")
 			return
 		}
-		navigationController?.pushViewController(next, animated: true)
+		navigationController?.pushViewController(nextController, animated: true)
 	}
 	
 	private func nextPageSinglePlayer() -> UIViewController? {
 		switch gameState {
 		case .none:
-			return nil
+			gameState = .choosingWord
+			return NextWordViewController()
 		case .choosingWord:
 			gameState = .drawing
 			return DrawViewController()
@@ -123,7 +132,38 @@ class GameManager {
 			gameState = .choosingWord
 			generateNextWord()
 			return NextWordViewController()
+		case .waitForPass:
+			print("WARNING: waitForPass state invalid in single player mode.")
+			return nil
 		}
+	}
+	
+	private func nextPageMultiPlayer() -> UIViewController? {
+		switch gameState {
+		case .none:
+			gameState = .waitForPass
+			return PassViewController()
+		case .choosingWord:
+			gameState = .drawing
+			return DrawViewController()
+		case .drawing:
+			return nil
+		case .postDrawing:
+			gameState = .waitForPass
+			return PassViewController()
+		case .waitForPass:
+			gameState = .choosingWord
+			generateNextWord()
+			return NextWordViewController()
+		}
+	}
+	
+	func didReceiveGuessGesture() {
+		print("Guess Gesture")
+		self.stopCountdown()
+		self.stopPollingCanvas()
+		self.gameState = .postDrawing(win: true)
+		self.wins += 1
 	}
 	
 	@objc func quit() {
@@ -189,8 +229,13 @@ class GameManager {
 			if case .drawing = gameState {} else { print("Warning: postDrawing entered from non-drawing state") }
 			stopCountdown()
 			stopPollingCanvas()
-			gameState = .postDrawing(win: true)
-			self.wins += 1
+			if singlePlayer {
+				gameState = .postDrawing(win: true)
+				self.wins += 1
+			} else {
+				gameState = .postDrawing(win: false)
+				self.losses += 1 // versus machine
+			}
 		}
 	}
 }

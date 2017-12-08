@@ -42,7 +42,9 @@ class DrawViewController: UIViewController {
 	
 	var losses: Int = 0 {
 		didSet {
-			drawView.lossesBox.label.text = "\(losses)"
+			DispatchQueue.main.async {
+				self.drawView.lossesBox.label.text = "\(self.losses)"
+			}
 		}
 	}
 	
@@ -72,17 +74,34 @@ class DrawViewController: UIViewController {
 		currentGuess = nil
 		GameManager.shared.delegate = self
 		
-		currentWord = GameManager.shared.currentWord
+		if GameManager.shared.singlePlayer {
+			currentWord = GameManager.shared.currentWord
+		} else {
+			currentWord = nil
+		}
 		
 		wins = GameManager.shared.wins
 		losses = GameManager.shared.losses
 		secondsRemaining = 0
 		
+//		if !GameManager.shared.singlePlayer {
+//			GyroManager.shared.onFlipDown {
+//				GameManager.shared.didReceiveGuessGesture()
+//			}
+//			GyroManager.shared.listen()
+//		}
+		
 		GameManager.shared.startCountdown()
+		
+		GyroManager.shared.onFlipDown {
+			print("GESTURE")
+		}
+		GyroManager.shared.listen()
     }
 	
 	override func viewDidDisappear(_ animated: Bool) {
 		GameManager.shared.currentCanvas = nil
+		GyroManager.shared.stop()
 	}
 
     override func didReceiveMemoryWarning() {

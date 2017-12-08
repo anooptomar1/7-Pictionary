@@ -32,21 +32,31 @@ class TitleViewController: UIViewController {
 			action: #selector(didTouchMultiPlayerButton(sender:)),
 			for: .touchUpInside
 		)
+		
+		titleView.settingsButton.addTarget(
+			self,
+			action: #selector(didTouchSettingsButton(sender:)),
+			for: .touchUpInside
+		)
 	}
 
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
 	}
+	
+	@objc func didTouchSettingsButton(sender: UIButton) {
+		print("Settings button")
+	}
 
 	@objc func didTouchSinglePlayerButton(sender: UIButton) {
 		print("Single player mode selected.")
 		GameManager.shared.prepareSinglePlayerGame()
-		navigationController?.pushViewController(NextWordViewController(), animated: true)
 	}
 	
 	@objc func didTouchMultiPlayerButton(sender: UIButton) {
 		print("Multi player mode selected.")
+		GameManager.shared.prepareMultiPlayerGame()
 	}
 }
 

@@ -11,6 +11,8 @@
 		27332BAF1FD749A700D9E46D /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27332BAE1FD749A700D9E46D /* TitleViewController.swift */; };
 		27332BB41FD749A700D9E46D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27332BB31FD749A700D9E46D /* Assets.xcassets */; };
 		27518EEC1FDA3A2C00E792B1 /* PushButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27518EEB1FDA3A2C00E792B1 /* PushButton.swift */; };
+		27518EEF1FDA98C400E792B1 /* PassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27518EEE1FDA98C400E792B1 /* PassViewController.swift */; };
+		27518EF11FDA992E00E792B1 /* PassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27518EF01FDA992E00E792B1 /* PassView.swift */; };
 		275E09361FD9BF8F0000812F /* RandomClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275E09351FD9BF8F0000812F /* RandomClassifier.swift */; };
 		275E09381FD9C8720000812F /* Words.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275E09371FD9C8720000812F /* Words.swift */; };
 		276260FB1FD7B0F400EFB16F /* CARadialGradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276260FA1FD7B0F400EFB16F /* CARadialGradientLayer.swift */; };
@@ -40,6 +42,8 @@
 		27332BB31FD749A700D9E46D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27332BB81FD749A700D9E46D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27518EEB1FDA3A2C00E792B1 /* PushButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushButton.swift; sourceTree = "<group>"; };
+		27518EEE1FDA98C400E792B1 /* PassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassViewController.swift; sourceTree = "<group>"; };
+		27518EF01FDA992E00E792B1 /* PassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassView.swift; sourceTree = "<group>"; };
 		275E09351FD9BF8F0000812F /* RandomClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomClassifier.swift; sourceTree = "<group>"; };
 		275E09371FD9C8720000812F /* Words.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Words.swift; sourceTree = "<group>"; };
 		276260FA1FD7B0F400EFB16F /* CARadialGradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CARadialGradientLayer.swift; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 				27332BAC1FD749A700D9E46D /* AppDelegate.swift */,
 				276261081FD8BFF500EFB16F /* Design.swift */,
 				276261001FD8890200EFB16F /* Title */,
+				27518EED1FDA98AA00E792B1 /* Pass */,
 				276261011FD8890C00EFB16F /* Next Word */,
 				2762610C1FD8C97100EFB16F /* Draw */,
 				276261021FD8891300EFB16F /* Components */,
@@ -120,6 +125,15 @@
 				27332BB81FD749A700D9E46D /* Info.plist */,
 			);
 			path = Pictionary;
+			sourceTree = "<group>";
+		};
+		27518EED1FDA98AA00E792B1 /* Pass */ = {
+			isa = PBXGroup;
+			children = (
+				27518EEE1FDA98C400E792B1 /* PassViewController.swift */,
+				27518EF01FDA992E00E792B1 /* PassView.swift */,
+			);
+			path = Pass;
 			sourceTree = "<group>";
 		};
 		276261001FD8890200EFB16F /* Title */ = {
@@ -320,6 +334,7 @@
 			files = (
 				2762611B1FD9044900EFB16F /* Classifier.swift in Sources */,
 				2762611F1FD91D7800EFB16F /* GameManager.swift in Sources */,
+				27518EF11FDA992E00E792B1 /* PassView.swift in Sources */,
 				276261071FD8AE7600EFB16F /* GyroManager.swift in Sources */,
 				276261091FD8BFF500EFB16F /* Design.swift in Sources */,
 				2762610E1FD8C9DB00EFB16F /* DrawView.swift in Sources */,
@@ -335,6 +350,7 @@
 				27518EEC1FDA3A2C00E792B1 /* PushButton.swift in Sources */,
 				27332BAD1FD749A700D9E46D /* AppDelegate.swift in Sources */,
 				276260FD1FD86ECD00EFB16F /* TitleView.swift in Sources */,
+				27518EEF1FDA98C400E792B1 /* PassViewController.swift in Sources */,
 				2762611D1FD91CEF00EFB16F /* CNNClassifier.swift in Sources */,
 				276261101FD8CE1800EFB16F /* LabelBox.swift in Sources */,
 				276261151FD9039A00EFB16F /* RandomForest.mlmodel in Sources */,

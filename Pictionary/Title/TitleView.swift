@@ -12,6 +12,8 @@ class TitleView: UIView {
 
 	var gradientBackgroundLayer: CARadialGradientLayer!
 	
+	var settingsButton: PushButton!
+	
 	var logoView: UIImageView!
 	var stackView: UIStackView!
 	
@@ -33,6 +35,14 @@ class TitleView: UIView {
 			return l
 		}()
 		layer.addSublayer(gradientBackgroundLayer)
+		
+		settingsButton = {
+			let b = PushButton()
+			b.translatesAutoresizingMaskIntoConstraints = false
+			b.setImage(UIImage(imageLiteralResourceName: "Settings"), for: .normal)
+			return b
+		}()
+		addSubview(settingsButton)
 		
 		logoView = {
 			let iv = UIImageView()
@@ -103,9 +113,13 @@ class TitleView: UIView {
 	override func updateConstraints() {
 		super.updateConstraints()
 		
+		let margins = layoutMarginsGuide
+		
+		settingsButton.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+		settingsButton.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
+		
 		logoView.widthAnchor.constraint(equalTo: logoView.heightAnchor, multiplier: 1080/693, constant: 0.0).isActive = true
 		
-		let margins = layoutMarginsGuide
 		stackView.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
 		stackView.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
 		stackView.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
