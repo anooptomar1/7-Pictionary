@@ -68,6 +68,8 @@ class DrawViewController: UIViewController {
 		currentGuess = nil
 		GameManager.shared.delegate = self
 		
+		currentWord = GameManager.shared.currentWord
+		
 		wins = 0
 		losses = 0
 		secondsRemaining = 0
