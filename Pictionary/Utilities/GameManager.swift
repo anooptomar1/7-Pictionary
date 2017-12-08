@@ -12,9 +12,12 @@ import TouchDraw
 protocol GameManagerDelegate {
 	func modelDidGuess(_ guess: String?)
 	func countdownDidUpdate(secondsRemaining: Int?)
+	func currentWordDidUpdate(_ currentWord: String?)
 }
 
 class GameManager {
+	
+	var navigationController: UINavigationController? = nil
 	
 	var currentCanvas: TouchDrawView? = nil {
 		didSet {
@@ -28,7 +31,11 @@ class GameManager {
 	
 	static let guessThreshold = 0.5
 	static let shared = GameManager()
-	var currentWord: String? = nil
+	var currentWord: String? = nil {
+		didSet {
+			delegate?.currentWordDidUpdate(currentWord)
+		}
+	}
 	lazy var classifier: DrawingClassifier = CNNClassifier()
 	var delegate: GameManagerDelegate? = nil
 	var canvasPollingTimer: Timer? = nil
@@ -55,6 +62,11 @@ class GameManager {
 			self.delegate?.countdownDidUpdate(secondsRemaining: self.secondsRemaining)
 			if self.secondsRemaining == 0 { self.secondsRemaining = nil; timer.invalidate() }
 		}
+	}
+	
+	@objc func quit() {
+		print("quit")
+		navigationController?.popToRootViewController(animated: true)
 	}
 	
 	private func startPollingCanvas() {

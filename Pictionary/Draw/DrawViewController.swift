@@ -81,6 +81,8 @@ class DrawViewController: UIViewController {
 }
 
 extension DrawViewController: GameManagerDelegate {
+	func currentWordDidUpdate(_ currentWord: String?) {}
+	
 	func modelDidGuess(_ guess: String?) {
 		currentGuess = guess
 	}

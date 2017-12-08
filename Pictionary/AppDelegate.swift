@@ -19,9 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let navigationController = UINavigationController()
 		navigationController.setNavigationBarHidden(true, animated: false)
 		
+		GameManager.shared.navigationController = navigationController
+		
 		window = UIWindow(frame: UIScreen.main.bounds)
 //		window!.rootViewController = TitleViewController()
-		navigationController.viewControllers = [DrawViewController()]
+		navigationController.viewControllers = [TitleViewController()]
 		window!.rootViewController = navigationController
 		
 		window!.backgroundColor = .white

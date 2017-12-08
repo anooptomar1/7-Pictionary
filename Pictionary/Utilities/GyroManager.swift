@@ -6,18 +6,22 @@
 //  Copyright © 2017 Justin Wilson. All rights reserved.
 //
 
-import Foundation
 import CoreMotion
+import UIKit
 
 class GyroManager {
 	typealias Callback = ()->Void
 	private var flipUpCallback: Callback?
 	private var flipDownCallback: Callback?
 	
-	var manager: CMMotionManager
-	var isWaitingForMotion = false
+	private(set) static var shared = GyroManager()
 	
-	init() {
+	var manager: CMMotionManager
+	var stableTheta: Double = 1.4 // assumes vertical
+	var previousAttitude: CMAttitude? = nil
+	var flippedFlag = 0 // debounce flipped flag
+	
+	private init() {
 		let cmQueue = OperationQueue()
 		manager = CMMotionManager()
 		
@@ -27,56 +31,59 @@ class GyroManager {
 			return
 		}
 		
-		manager.deviceMotionUpdateInterval = 0.02
-		
-		manager.startDeviceMotionUpdates(to: cmQueue) { (data, error) in
-			guard self.isWaitingForMotion else {
-				return
-			}
+		manager.deviceMotionUpdateInterval = 0.09
+		manager.startDeviceMotionUpdates(to: cmQueue) { data, error in
 			guard
 				let x = data?.rotationRate.x, // Lateral axis rotation rate
-				let z = data?.userAcceleration.z // Normal axis acceleration
+				let currentAttitude = data?.attitude //get current attitude, all 3 euler angles
 			else {
 				print("Warning: could not parse CoreMotion data.")
 				return
 			}
 			
-			if z < -0.2 && x < -3.0 {
+			if self.previousAttitude == nil {
+				//save previous
+				self.previousAttitude = currentAttitude
+				return
+			}
+			
+			//copy currentAttitude for next itteration, currentAttitude will be modified
+			let backupAttitude = currentAttitude.copy(with: nil) as! CMAttitude
+			
+			//calulate the difference between the previous attitude and the present
+			currentAttitude.multiply(byInverseOf: self.previousAttitude!)
+			let theta = currentAttitude.pitch //this is the difference in pitch
+			
+			//store backup as previous
+			self.previousAttitude = backupAttitude
+			
+			/* NOTE: x or rotation rate about the x-axis, also known as l, implys direction.
+			Theta is the euler angle for pitch in rads, 90 degrees is ~ 1.57 rads;
+			this makes flip up postive or negative, and down is always postive --
+			between their differences. */
+			if self.flippedFlag > 0 {
+				self.flippedFlag -= 1
+			} else if (theta > 0.3 || theta < -0.3) && x < -0.3 {
 				// Flip up
 				self.flipDispatch(callbackFunc: self.flipUpCallback)
-				
-				// Debug print statments
-				print("Flip Up\nx: " + String(x))
-				print("z: " + String(z) + "\n")
-				
-			} else if z > 0.4 && x > 6.0 {
+				self.flippedFlag = 10
+//				print("Flip Up")
+//				print("theta: \(theta)")
+//				print("x: \(x)\n")
+			} else if theta > 0.3 && x > 0.3  {
 				// Flip down
 				self.flipDispatch(callbackFunc: self.flipDownCallback)
-				
-				// Debug print statments
-				print("Flip Down\nx: " + String(x))
-				print("z: " + String(z) + "\n")
-				
+				self.flippedFlag = 10
+//				print("Flip Down")
+//				print("theta: \(theta)")
+//				print("x: \(x)\n")
 			}
 		}
-		
-		isWaitingForMotion = true
 	}
 	
 	private func flipDispatch(callbackFunc callback: Callback?) {
-		DispatchQueue.main.async {
-			if let callback = callback { callback() }
-			
-			self.isWaitingForMotion = false // not waiting for motion - debounce
-			
-			//Start Timer to resume waiting for motion - debounce (run on main queue)
-			Timer.scheduledTimer(withTimeInterval: 0.7, repeats: false, block: { timer in
-				self.isWaitingForMotion = true
-			})
-			/** NOTE: Once an timer is invalidated it cannot be reused per the API,
-			thus a new Timer is created every time. "Once invalidated, timer objects
-			cannot be reused."  An interval timer does not work here. **/
-		}
+		guard let callback = callback else { return }
+		DispatchQueue.main.async(execute: callback)
 	}
 	
 	func listen() {

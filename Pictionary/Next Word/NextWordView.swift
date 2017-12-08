@@ -19,7 +19,8 @@ class NextWordView: UIView {
 	var acceptCard: UIView!
 	var denyCard: UIView!
 	var gestureCards: UIStackView!
-	var mainStack: UIStackView!
+	
+	var quitButton: PushButton!
 
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -66,9 +67,11 @@ class NextWordView: UIView {
 			])
 			s.translatesAutoresizingMaskIntoConstraints = false
 			s.axis = .vertical
-			s.distribution = .equalCentering
+			s.distribution = .equalSpacing
+			s.spacing = 20
 			return s
 		}()
+		addSubview(drawPromptStack)
 		
 		acceptCard = makeCard(
 			image: UIImage(imageLiteralResourceName: "flip-forward"),
@@ -97,18 +100,15 @@ class NextWordView: UIView {
 			
 			return s
 		}()
+		addSubview(gestureCards)
 		
-		mainStack = {
-			let s = UIStackView(arrangedSubviews: [
-				drawPromptStack,
-				gestureCards
-			])
-			s.translatesAutoresizingMaskIntoConstraints = false
-			s.axis = .vertical
-			s.distribution = .fillEqually
-			return s
+		quitButton = {
+			let b = PushButton()
+			b.translatesAutoresizingMaskIntoConstraints = false
+			b.setImage(UIImage(imageLiteralResourceName: "Quit"), for: .normal)
+			return b
 		}()
-		addSubview(mainStack)
+		addSubview(quitButton)
 		
 		setNeedsUpdateConstraints()
 	}
@@ -147,7 +147,6 @@ class NextWordView: UIView {
 		}()
 		
 		let wordStack = UIStackView(arrangedSubviews: [
-			UIView(),
 			titleLabel,
 			subtitleLabel,
 			UIView()
@@ -193,11 +192,19 @@ class NextWordView: UIView {
 	override func updateConstraints() {
 		super.updateConstraints()
 		
-		gestureCards.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5, constant: 0).isActive = true
+		let margins = layoutMarginsGuide
 		
-		mainStack.topAnchor.constraint(equalTo: topAnchor).isActive = true
-		mainStack.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-		mainStack.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-		mainStack.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+		quitButton.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
+		quitButton.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+		
+		drawPromptStack.topAnchor.constraint(equalTo: quitButton.bottomAnchor).isActive = true
+		drawPromptStack.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+		drawPromptStack.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+		drawPromptStack.bottomAnchor.constraint(equalTo: gestureCards.topAnchor, constant: -10).isActive = true
+		
+		gestureCards.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5, constant: 0).isActive = true
+		gestureCards.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+		gestureCards.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+		gestureCards.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 	}
 }

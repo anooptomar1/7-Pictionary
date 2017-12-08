@@ -14,7 +14,11 @@ class NextWordViewController: UIViewController {
 		return view as! NextWordView
 	}
 	
-	lazy var gyroManager = GyroManager()
+	var currentWord: String? = nil {
+		didSet {
+			nextWordView.drawItemLabel.text = currentWord?.uppercased() ?? "?"
+		}
+	}
 	
 	override func loadView() {
 		view = NextWordView(frame: UIScreen.main.bounds)
@@ -22,14 +26,20 @@ class NextWordViewController: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-		gyroManager.onFlipDown(didAcceptWord)
-		gyroManager.onFlipUp(didDenyWord)
-		gyroManager.listen()
+		
+		GameManager.shared.delegate = self
+		
+		currentWord = GameManager.shared.currentWord
+		
+		nextWordView.quitButton.addTarget(GameManager.shared, action: #selector(GameManager.quit), for: .touchUpInside)
+		
+		GyroManager.shared.onFlipDown(didAcceptWord)
+		GyroManager.shared.onFlipUp(didDenyWord)
+		GyroManager.shared.listen()
     }
 	
 	override func viewDidDisappear(_ animated: Bool) {
-		gyroManager.stop()
+		GyroManager.shared.stop()
 	}
 
     override func didReceiveMemoryWarning() {
@@ -43,5 +53,16 @@ class NextWordViewController: UIViewController {
 	
 	func didDenyWord() {
 		self.nextWordView.flashCard(self.nextWordView.denyCard)
+		GameManager.shared.generateNextWord()
+	}
+}
+
+extension NextWordViewController: GameManagerDelegate {
+	func modelDidGuess(_ guess: String?) {}
+	func countdownDidUpdate(secondsRemaining: Int?) {}
+	
+	func currentWordDidUpdate(_ currentWord: String?) {
+		print("currentWordDidUpdate: \(currentWord ?? "nil")")
+		self.currentWord = currentWord
 	}
 }
