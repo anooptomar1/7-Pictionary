@@ -13,6 +13,8 @@
 		27518EEC1FDA3A2C00E792B1 /* PushButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27518EEB1FDA3A2C00E792B1 /* PushButton.swift */; };
 		27518EEF1FDA98C400E792B1 /* PassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27518EEE1FDA98C400E792B1 /* PassViewController.swift */; };
 		27518EF11FDA992E00E792B1 /* PassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27518EF01FDA992E00E792B1 /* PassView.swift */; };
+		27518EF31FDAA8CB00E792B1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27518EF21FDAA8CB00E792B1 /* SettingsViewController.swift */; };
+		27518EF51FDAA91D00E792B1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27518EF41FDAA91D00E792B1 /* SettingsView.swift */; };
 		275E09361FD9BF8F0000812F /* RandomClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275E09351FD9BF8F0000812F /* RandomClassifier.swift */; };
 		275E09381FD9C8720000812F /* Words.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275E09371FD9C8720000812F /* Words.swift */; };
 		276260FB1FD7B0F400EFB16F /* CARadialGradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276260FA1FD7B0F400EFB16F /* CARadialGradientLayer.swift */; };
@@ -44,6 +46,8 @@
 		27518EEB1FDA3A2C00E792B1 /* PushButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushButton.swift; sourceTree = "<group>"; };
 		27518EEE1FDA98C400E792B1 /* PassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassViewController.swift; sourceTree = "<group>"; };
 		27518EF01FDA992E00E792B1 /* PassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassView.swift; sourceTree = "<group>"; };
+		27518EF21FDAA8CB00E792B1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		27518EF41FDAA91D00E792B1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		275E09351FD9BF8F0000812F /* RandomClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomClassifier.swift; sourceTree = "<group>"; };
 		275E09371FD9C8720000812F /* Words.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Words.swift; sourceTree = "<group>"; };
 		276260FA1FD7B0F400EFB16F /* CARadialGradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CARadialGradientLayer.swift; sourceTree = "<group>"; };
@@ -141,6 +145,8 @@
 			children = (
 				27332BAE1FD749A700D9E46D /* TitleViewController.swift */,
 				276260FC1FD86ECD00EFB16F /* TitleView.swift */,
+				27518EF21FDAA8CB00E792B1 /* SettingsViewController.swift */,
+				27518EF41FDAA91D00E792B1 /* SettingsView.swift */,
 			);
 			path = Title;
 			sourceTree = "<group>";
@@ -335,6 +341,7 @@
 				2762611B1FD9044900EFB16F /* Classifier.swift in Sources */,
 				2762611F1FD91D7800EFB16F /* GameManager.swift in Sources */,
 				27518EF11FDA992E00E792B1 /* PassView.swift in Sources */,
+				27518EF31FDAA8CB00E792B1 /* SettingsViewController.swift in Sources */,
 				276261071FD8AE7600EFB16F /* GyroManager.swift in Sources */,
 				276261091FD8BFF500EFB16F /* Design.swift in Sources */,
 				2762610E1FD8C9DB00EFB16F /* DrawView.swift in Sources */,
@@ -346,6 +353,7 @@
 				276261161FD9039A00EFB16F /* CNN.mlmodel in Sources */,
 				276261191FD903FB00EFB16F /* ImageTools.swift in Sources */,
 				27332BAF1FD749A700D9E46D /* TitleViewController.swift in Sources */,
+				27518EF51FDAA91D00E792B1 /* SettingsView.swift in Sources */,
 				276260FB1FD7B0F400EFB16F /* CARadialGradientLayer.swift in Sources */,
 				27518EEC1FDA3A2C00E792B1 /* PushButton.swift in Sources */,
 				27332BAD1FD749A700D9E46D /* AppDelegate.swift in Sources */,

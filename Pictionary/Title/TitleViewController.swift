@@ -47,6 +47,7 @@ class TitleViewController: UIViewController {
 	
 	@objc func didTouchSettingsButton(sender: UIButton) {
 		print("Settings button")
+		present(SettingsViewController(), animated: true, completion: nil)
 	}
 
 	@objc func didTouchSinglePlayerButton(sender: UIButton) {
