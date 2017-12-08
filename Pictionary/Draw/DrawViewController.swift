@@ -10,6 +10,7 @@ import UIKit
 import TouchDraw
 
 class DrawViewController: UIViewController {
+	private var impactFeedbackGenerator = UIImpactFeedbackGenerator()
 	
 	var currentGuess: String? {
 		didSet {
@@ -94,6 +95,7 @@ class DrawViewController: UIViewController {
 		if !GameManager.shared.singlePlayer {
 			GyroManager.shared.onFlipDown {
 				print("GESTURE")
+				self.impactFeedbackGenerator.impactOccurred()
 				GameManager.shared.didReceiveGuessGesture()
 			}
 			GyroManager.shared.listen()
