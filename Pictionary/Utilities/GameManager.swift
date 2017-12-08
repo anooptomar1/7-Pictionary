@@ -13,6 +13,11 @@ protocol GameManagerDelegate {
 	func modelDidGuess(_ guess: String?)
 	func countdownDidUpdate(secondsRemaining: Int?)
 	func currentWordDidUpdate(_ currentWord: String?)
+	func gameStateDidChange(_ gameState: GameState)
+}
+
+enum GameState {
+	case none, choosingWord, drawing
 }
 
 class GameManager {
@@ -39,33 +44,69 @@ class GameManager {
 	lazy var classifier: DrawingClassifier = CNNClassifier()
 	var delegate: GameManagerDelegate? = nil
 	var canvasPollingTimer: Timer? = nil
-	var inGame = false
 	var secondsRemaining: Int? = nil
+	var countdownTimer: Timer? = nil
+	
+	private var singlePlayer = true
+	private var gameState: GameState = .none
 	
 	private init() {}
 	
 	func prepareSinglePlayerGame() {
-		inGame = true
+		singlePlayer = true
+		gameState = .choosingWord
 		generateNextWord()
 	}
 	
 	func generateNextWord() {
-		currentWord = inGame ? Words.shared.random() : nil
+		if gameState == .none {
+			currentWord = nil
+		} else {
+			currentWord = Words.shared.random()
+		}
 	}
 	
 	func startCountdown() {
-		let gameLength = 10
+		let gameLength = 30
 		self.secondsRemaining = gameLength
 		self.delegate?.countdownDidUpdate(secondsRemaining: self.secondsRemaining)
-		Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+		print("\(String(describing: self.secondsRemaining) ?? "—")")
+		countdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
 			self.secondsRemaining = self.secondsRemaining! - 1
 			self.delegate?.countdownDidUpdate(secondsRemaining: self.secondsRemaining)
-			if self.secondsRemaining == 0 { self.secondsRemaining = nil; timer.invalidate() }
+			print("\(String(describing: self.secondsRemaining) ?? "—")")
+			if self.secondsRemaining == 0 { self.secondsRemaining = nil; self.stopCountdown() }
+		}
+	}
+	
+	func stopCountdown() {
+		print("STOP")
+		countdownTimer?.invalidate()
+		countdownTimer = nil
+	}
+	
+	func goToNextPage() {
+		guard let next = nextPageSinglePlayer() else {
+			print("Couldn't get next page in game state \(String(describing: gameState))")
+			return
+		}
+		navigationController?.pushViewController(next, animated: true)
+	}
+	
+	private func nextPageSinglePlayer() -> UIViewController? {
+		switch gameState {
+		case .none:
+			return nil
+		case .choosingWord:
+			return DrawViewController()
+		case .drawing:
+			return nil
 		}
 	}
 	
 	@objc func quit() {
-		print("quit")
+		gameState = .none
+		stopCountdown()
 		navigationController?.popToRootViewController(animated: true)
 	}
 	

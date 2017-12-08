@@ -49,6 +49,7 @@ class NextWordViewController: UIViewController {
 	
 	func didAcceptWord() {
 		self.nextWordView.flashCard(self.nextWordView.acceptCard)
+		GameManager.shared.goToNextPage()
 	}
 	
 	func didDenyWord() {
@@ -58,6 +59,7 @@ class NextWordViewController: UIViewController {
 }
 
 extension NextWordViewController: GameManagerDelegate {
+	func gameStateDidChange(_ gameState: GameState) {}
 	func modelDidGuess(_ guess: String?) {}
 	func countdownDidUpdate(secondsRemaining: Int?) {}
 	

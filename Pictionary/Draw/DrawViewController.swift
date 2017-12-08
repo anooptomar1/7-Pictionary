@@ -23,6 +23,15 @@ class DrawViewController: UIViewController {
 		}
 	}
 	
+	var currentWord: String? {
+		didSet {
+			let l = self.drawView.wordBox.label
+			DispatchQueue.main.async {
+				l?.text = self.currentWord?.uppercased() ?? "?"
+			}
+		}
+	}
+	
 	var wins: Int = 0 {
 		didSet {
 			drawView.winsBox.label.text = "\(wins)"
@@ -53,6 +62,7 @@ class DrawViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		drawView.clearButton.addTarget(nil, action: #selector(clearCanvas), for: .touchUpInside)
+		drawView.quitButton.addTarget(GameManager.shared, action: #selector(GameManager.quit), for: .touchUpInside)
 		
 		GameManager.shared.currentCanvas = drawView.canvas
 		currentGuess = nil
@@ -81,6 +91,7 @@ class DrawViewController: UIViewController {
 }
 
 extension DrawViewController: GameManagerDelegate {
+	func gameStateDidChange(_ gameState: GameState) {}
 	func currentWordDidUpdate(_ currentWord: String?) {}
 	
 	func modelDidGuess(_ guess: String?) {
